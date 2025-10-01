@@ -1,0 +1,26 @@
+# Visual Studio folder
+.vs/
+
+# Entity Framework Migrations folder
+Migrations/
+
+# Ignore all images (jpg, png, gif, jpeg, bmp, svg)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.svg
+
+# Ignore all PDFs
+*.pdf
+
+# Ignore user-specific files
+*.user
+*.suo
+*.cache
+
+# Ignore build output
+bin/
+obj/
+

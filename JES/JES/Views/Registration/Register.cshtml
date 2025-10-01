@@ -1,0 +1,156 @@
+﻿@model JES.Models.UserVm
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Register";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Jui Embroidery</title>
+    <link rel="icon" type="image/png" href="@(Url.Content("~/logo/favicon.png"))" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDnNQw5x5F86dIHNDz0W1yM"
+          crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <main class="flex-grow-1 d-flex align-items-center justify-content-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow-lg border-0 my-5">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <a asp-controller="Landing" asp-action="Index">
+                                    <img src="~/logo/favicon.png" alt="Logo" width="60" class="mb-3" />
+                                </a>
+                                <h3 class="fw-bold">Create an Account</h3>
+                                <p class="text-muted small">Join E-Group Pharma and manage your pharmacy easily</p>
+                            </div>
+
+                            <!-- Standard Form Submission -->
+                            <form asp-action="Register" asp-controller="Registration" method="post" enctype="multipart/form-data">
+
+                                <!-- Name -->
+                                <div class="form-floating mb-3 position-relative">
+                                    <input asp-for="U_NAME" class="form-control" placeholder="User Name" />
+                                    <label asp-for="U_NAME">User Name</label>
+                                    <span asp-validation-for="U_NAME" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="form-floating mb-3 position-relative">
+                                    <input asp-for="U_EMAIL" class="form-control" placeholder="Email Address" />
+                                    <label asp-for="U_EMAIL">Email Address</label>
+                                    <span asp-validation-for="U_EMAIL" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="form-floating mb-3 position-relative">
+                                    <input asp-for="U_PHONE_NO" class="form-control" placeholder="Phone Number" />
+                                    <label asp-for="U_PHONE_NO">Phone Number</label>
+                                    <span asp-validation-for="U_PHONE_NO" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Address -->
+                                <div class="form-floating mb-3 position-relative">
+                                    <input asp-for="U_ADDRESS" class="form-control" placeholder="Address" />
+                                    <label asp-for="U_ADDRESS">Address</label>
+                                </div>
+
+                                <!-- Profile Image Upload -->
+                                <div class="mb-3">
+                                    <label asp-for="ProfileImage" class="form-label">Profile Image</label>
+                                    <input asp-for="ProfileImage" type="file" class="form-control" />
+                                </div>
+
+                                <!-- Password -->
+                                <div class="form-floating mb-3 position-relative">
+                                    <input asp-for="U_PASSWORD" type="password" class="form-control" id="U_PASSWORD" placeholder="Password" />
+                                    <label asp-for="U_PASSWORD">Password</label>
+                                    <span asp-validation-for="U_PASSWORD" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Confirm Password -->
+                                <div class="form-floating mb-4 position-relative">
+                                    <input asp-for="U_CONFIRM_PASSWORD" type="password" class="form-control" id="U_CONFIRM_PASSWORD" placeholder="Confirm Password" />
+                                    <label asp-for="U_CONFIRM_PASSWORD">Confirm Password</label>
+                                    <span asp-validation-for="U_CONFIRM_PASSWORD" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Submit -->
+                                <button type="submit" class="btn btn-success w-100">Register</button>
+
+                                <!-- Show server-side error if any -->
+                                @if (!string.IsNullOrEmpty(ViewBag.error as string))
+                                {
+                                    <div class="alert alert-danger mt-3 text-center" role="alert">
+                                        @ViewBag.error
+                                    </div>
+                                }
+                            </form>
+
+                            <hr>
+                            <div class="text-center login-footer">
+                                <a asp-controller="Login" asp-action="Login">Already have an account? Sign in!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center text-Black-50 py-3">
+        &copy; 2025 - Jui Embroidery -
+        <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-dark text-decoration-none">Privacy</a>
+    </footer>
+
+@*     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-K+ctZQop01xPvvrL1jAU6RewsG3KzB204MS+dorangeQ="
+            crossorigin="anonymous"></script>
+
+    <!-- Bootstrap 4.6.2 Bundle JS (includes Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        @if (TempData["Success"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                    title: 'Success!',
+                    text: '@TempData["Success"]',
+                    confirmButtonText: 'OK'
+                            });
+            </text>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'error',
+                    title: 'Oops!',
+                    text: '@TempData["Error"]',
+                    confirmButtonText: 'Try Again'
+                            });
+            </text>
+        }
+    </script>
+}
