@@ -9,6 +9,27 @@ document.addEventListener('DOMContentLoaded', function() {
         hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
     });
 
+    // Hero slider functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        // Hide all slides
+        slides.forEach(slide => slide.classList.remove('active'));
+        
+        // Show the current slide
+        slides[index].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    // Auto change slides every 4 seconds
+    setInterval(nextSlide, 4000);
+
     // Add animation to cards when they come into view
     const observerOptions = {
         root: null,

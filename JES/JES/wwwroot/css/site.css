@@ -30,11 +30,11 @@ body {
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-    padding-top: 80px; /* Add padding to account for fixed navbar */
+    padding-top: 70px; /* Add padding to account for fixed navbar */
 }
 
 html {
-    scroll-padding-top: 80px; /* Adjust for navbar height */
+    scroll-padding-top: 70px; /* Adjust for navbar height */
 }
 
 #home {
@@ -49,8 +49,8 @@ header {
 
 /* Navigation */
 .navbar {
-    background: var(--accent-color);
-    padding: 1rem 0;
+    background: rgba(0, 0, 0, 0.212);
+    padding: 0.6rem 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     margin: 0;
@@ -63,18 +63,49 @@ header {
 
 .navbar.scrolled {
     padding: 0.5rem 0;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-brand {
     font-size: 1.8rem;
     font-weight: 700;
-    color: white !important;
+    font-family: monospace;
+    color: rgb(47, 0, 255) !important;
     text-transform: uppercase;
     letter-spacing: 1px;
     display: flex;
     align-items: center;
-}
+   text-shadow: 
+        0 0 5px #0ff, 
+        0 0 10px #0ff, 
+        0 0 20px #0ff, 
+        0 0 40px #0ff, 
+        0 0 80px #0ff, 
+        0 0 90px #0ff;
+      animation: glow 1.5s infinite alternate;
+    }
+
+    /* Animation for glowing effect */
+    @keyframes glow {
+      from {
+        text-shadow: 
+          0 0 5px #0ff, 
+          0 0 10px #0ff, 
+          0 0 20px #0ff, 
+          0 0 40px #0ff, 
+          0 0 80px #0ff, 
+          0 0 90px #0ff;
+      }
+      to {
+        text-shadow: 
+          0 0 10px #0ff, 
+          0 0 20px #0ff, 
+          0 0 40px #0ff, 
+          0 0 80px #0ff, 
+          0 0 120px #0ff, 
+          0 0 150px #0ff;
+      }
+    }
 
 .navbar-brand i {
     margin-right: 10px;
@@ -92,10 +123,11 @@ header {
 }
 
 .navbar-nav .nav-link {
-    color: rgba(255,255,255,0.9) !important;
+    color: rgb(255, 255, 255) !important;
     margin: 0 15px;
+    font-bold: 500;
     transition: all 0.3s ease;
-    font-weight: 500;
+    font-weight: 700;
     position: relative;
     padding: 5px 0;
 }
@@ -149,17 +181,15 @@ header {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(13, 45, 105, 0.9) 0%, rgba(13, 45, 105, 0.95) 100%), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSI4MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWE0MDhkO3N0b3Atb3BhY2l0eToxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMGQyZDY5O3N0b3Atb3BhY2l0eToxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnKSIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjMwMCIgcj0iMTUwIiBmaWxsPSIjMjNiM2IzIiBvcGFjaXR5PSIwLjA1Ii8+PGNpcmNsZSBjeD0iNDAwIiBjeT0iMjAwIiByPSIxMDAiIGZpbGw9IiNiNDRkZGMiIG9wYWNpdHk9IjAuMDUiLz48Y2lyY2xlIGN4PSI3MDAiIGN5PSI0MDAiIHI9IjEyMCIgZmlsbD0iI2Y1Y2MyMyIgb3BhY2l0eT0iMC4wNSIvPjxjaXJjbGUgY3g9IjEyMDAiIGN5PSIzNTAiIHI9IjE4MCIgZmlsbD0iIzIzYjNiMyIgb3BhY2l0eT0iMC4wNSIvPjxjaXJjbGUgY3g9IjE1MDAiIGN5PSIyNTAiIHI9IjE0MCIgZmlsbD0iI2I0NGRkYyIgb3BhY2l0eT0iMC4wNSIvPjxwYXRoIGQ9Ik0wIDUwMCBRIDIwMCA0MDAsIDQwMCA1MDAgVCA4MDAgNTAwIFQgMTIwMCA1MDAgVCAxNjAwIDUwMCBUIDE5MjAgNTAwIEwgMTkyMCA4MDAgTCAwIDgwMCBaIiBmaWxsPSIjMDAwIiBvcGFjaXR5PSIwLjEiLz48L3N2Zz4=');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     color: white;
-    padding: 100px 0 150px 0;
     position: relative;
     min-height: 90vh;
     display: flex;
     align-items: center;
     margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
 }
 
 .hero::before {
@@ -171,6 +201,7 @@ header {
     bottom: 0;
     background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.03) 70px), repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,.02) 35px, rgba(255,255,255,.02) 70px);
     pointer-events: none;
+    z-index: 1;
 }
 
 .hero::after {
@@ -182,28 +213,96 @@ header {
     bottom: 0;
     background: radial-gradient(circle at 20% 50%, rgba(35, 179, 179, 0.12) 0%, transparent 40%), radial-gradient(circle at 80% 30%, rgba(180, 77, 220, 0.1) 0%, transparent 40%), radial-gradient(circle at 60% 70%, rgba(245, 204, 35, 0.08) 0%, transparent 40%);
     pointer-events: none;
+    z-index: 1;
+}
+
+/* Hero Slider Styles */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-slide {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.hero-slide.active {
+    display: block;
+}
+
+.slide-1 {
+    background-image: url(https://static.vecteezy.com/system/resources/previews/036/594/871/large_2x/ai-generated-embroidery-background-with-copy-space-free-photo.jpg);
+      filter: brightness(95%);
+}
+
+.slide-2 {
+background-image: url(https://floss.maxxmint.com/images/cross_stitch.jpg);
+   filter: brightness(95%);
+
+}
+
+.slide-3 {
+    background-image: url(https://i.ytimg.com/vi/OHCFcNeZlbQ/maxresdefault.jpg);
+       filter: brightness(95%);
+}
+
+.hero-slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.hero-slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
 }
 
 .hero-content {
+    color: aliceblue;
     position: relative;
-    z-index: 2;
+    z-index: 5;
     max-width: 800px;
     animation: fadeInUp 1s ease;
+    padding: 100px 0 150px 0;
 }
 
 .hero h1 {
     font-size: 3.5rem;
     font-weight: 800;
+    font-family: 'Courier New', Courier, monospace;
     margin-bottom: 20px;
     line-height: 1.2;
+    color: greenyellow;
     text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 .hero p {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    
     margin-bottom: 30px;
-    opacity: 0.9;
-    max-width: 600px;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    max-width: 700px;
 }
 
 .btn-custom {
@@ -241,7 +340,7 @@ section {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
 .text-center {
