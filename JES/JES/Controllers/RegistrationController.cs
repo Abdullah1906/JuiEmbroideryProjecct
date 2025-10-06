@@ -121,14 +121,14 @@ namespace JES.Controllers
         }
 
 
-        [HttpGet("ForgetPasswordAdmin")]
+        [HttpPost("ForgetPasswordAdmin")]
         public IActionResult AdminForgetP()
         {
             return View();
 
         }
 
-        [HttpPost("ForgetPasswordAdmin")]
+        [HttpPost("ForgetPassword")]
         public async Task<IActionResult> ForgetPassword(UserVm usr)
         {
             try

@@ -3,28 +3,33 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - JES</title>
+    <title>@ViewData["Title"] - JUI Embroidery - Professional Embroidery Solutions</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JES.styles.css" asp-append-version="true" />
+  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">JES</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="#home">
+                    <i class="fas fa-thread"></i> JUI Embroidery
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -36,14 +41,420 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer>
         <div class="container">
-            &copy; 2025 - JES - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <p>&copy; 2024 JUI Embroidery. All rights reserved.</p>
+            <p class="mt-2">Professional Embroidery Solutions | Quality You Can Trust</p>
         </div>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.classList.remove('show');
+                    }
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.2)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+<style>
+    :root {
+        --primary-color: #0d2d69;
+        --secondary-color: #b44ddc;
+        --accent-color: #23b3b3;
+        --gold-accent: #f5cc23;
+        --text-dark: #212936;
+        --text-light: #6d7381;
+        --bg-muted: #f4f5f6;
+        --bg-secondary: #f0f3f9;
+        --border-color: #e3e5e8;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-dark);
+        line-height: 1.6;
+    }
+
+    /* Navigation */
+    .navbar {
+        background: var(--primary-color);
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .navbar-nav .nav-link {
+        color: rgba(255,255,255,0.9) !important;
+        margin: 0 15px;
+        transition: all 0.3s;
+        font-weight: 500;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: var(--accent-color) !important;
+        transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+        background:
+            linear-gradient(135deg, rgba(13, 45, 105, 0.85) 0%, rgba(13, 45, 105, 0.90) 100%),
+            url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSI4MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWE0MDhkO3N0b3Atb3BhY2l0eToxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMGQyZDY5O3N0b3Atb3BhY2l0eToxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNnKSIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjMwMCIgcj0iMTUwIiBmaWxsPSIjMjNiM2IzIiBvcGFjaXR5PSIwLjA1Ii8+PGNpcmNsZSBjeD0iNDAwIiBjeT0iMjAwIiByPSIxMDAiIGZpbGw9IiNiNDRkZGMiIG9wYWNpdHk9IjAuMDUiLz48Y2lyY2xlIGN4PSI3MDAiIGN5PSI0MDAiIHI9IjEyMCIgZmlsbD0iI2Y1Y2MyMyIgb3BhY2l0eT0iMC4wNSIvPjxjaXJjbGUgY3g9IjEyMDAiIGN5PSIzNTAiIHI9IjE4MCIgZmlsbD0iIzIzYjNiMyIgb3BhY2l0eT0iMC4wNSIvPjxjaXJjbGUgY3g9IjE1MDAiIGN5PSIyNTAiIHI9IjE0MCIgZmlsbD0iI2I0NGRkYyIgb3BhY2l0eT0iMC4wNSIvPjxwYXRoIGQ9Ik0wIDUwMCBRIDIwMCA0MDAsIDQwMCA1MDAgVCA4MDAgNTAwIFQgMTIwMCA1MDAgVCAxNjAwIDUwMCBUIDE5MjAgNTAwIEwgMTkyMCA4MDAgTCAwIDgwMCBaIiBmaWxsPSIjMDAwIiBvcGFjaXR5PSIwLjEiLz48L3N2Zz4=');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: white;
+        padding: 120px 0;
+        position: relative;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image:
+            repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.03) 70px),
+            repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,.02) 35px, rgba(255,255,255,.02) 70px);
+        pointer-events: none;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 50%, rgba(35, 179, 179, 0.12) 0%, transparent 40%),
+                    radial-gradient(circle at 80% 30%, rgba(180, 77, 220, 0.1) 0%, transparent 40%),
+                    radial-gradient(circle at 60% 70%, rgba(245, 204, 35, 0.08) 0%, transparent 40%);
+        pointer-events: none;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        animation: fadeInDown 1s;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 30px;
+        animation: fadeInUp 1s;
+        position: relative;
+        z-index: 1;
+    }
+
+    .btn-custom {
+        background: var(--accent-color);
+        color: white;
+        padding: 12px 35px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s;
+        border: none;
+        position: relative;
+        z-index: 1;
+    }
+
+    .btn-custom:hover {
+        background: var(--secondary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        color: white;
+    }
+
+    /* About Section */
+    .about-section {
+        padding: 80px 0;
+        background: var(--bg-muted);
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--accent-color);
+    }
+
+    /* Services */
+    .services-section {
+        padding: 80px 0;
+    }
+
+    .service-card {
+        background: white;
+        border-radius: 15px;
+        padding: 40px 30px;
+        text-align: center;
+        transition: all 0.3s;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        height: 100%;
+        border: 2px solid transparent;
+    }
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        border-color: var(--secondary-color);
+    }
+
+    .service-icon {
+        font-size: 3.5rem;
+        color: var(--accent-color);
+        margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+    }
+
+    /* Products */
+    .products-section {
+        padding: 80px 0;
+        background: var(--bg-secondary);
+    }
+
+    .product-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        transition: all 0.3s;
+        height: 100%;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .product-icon {
+        background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+        color: white;
+        padding: 40px;
+        font-size: 4rem;
+        text-align: center;
+    }
+
+    .product-body {
+        padding: 25px;
+    }
+
+    .product-body h4 {
+        color: var(--primary-color);
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    /* Team */
+    .team-section {
+        padding: 80px 0;
+    }
+
+    .team-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        transition: all 0.3s;
+    }
+
+    .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .team-icon {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 3rem;
+        color: white;
+    }
+
+    .team-card h4 {
+        color: var(--primary-color);
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .team-card .position {
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    /* Contact */
+    .contact-section {
+        padding: 80px 0;
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .contact-section .section-title {
+        color: white;
+    }
+
+    .contact-section .section-title::after {
+        background: var(--accent-color);
+    }
+
+    .contact-info {
+        background: rgba(255,255,255,0.1);
+        padding: 30px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .contact-item i {
+        font-size: 2rem;
+        color: var(--gold-accent);
+        margin-right: 20px;
+        width: 40px;
+    }
+
+    .contact-item div h5 {
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+
+    .contact-item div p {
+        margin: 0;
+        opacity: 0.9;
+    }
+
+    /* Footer */
+    footer {
+        background: #1a252f;
+        color: white;
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    footer p {
+        margin: 0;
+        opacity: 0.8;
+    }
+
+    /* Animations */
+    @@keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .navbar-nav .nav-link {
+            margin: 5px 0;
+        }
+    }
+</style>
