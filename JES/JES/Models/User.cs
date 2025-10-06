@@ -48,6 +48,13 @@ namespace JES.Models
 
 
     }
+    public class LoginVM
+    {
+        [Required]
+        public string? U_EMAIL { get; set; }
+        [Required]
+        public string? U_PASSWORD { get; set; }
+    }
     public class RegisterUserVM
     {
         public UserVm User { get; set; } = new();
