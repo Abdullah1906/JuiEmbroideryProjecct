@@ -50,7 +50,7 @@ header {
 
 /* Navigation */
 .navbar {
-    background: rgba(0, 0, 0, 0.212);
+    background: rgb(121 31 31 / 62%);
     padding: 0.6rem 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
