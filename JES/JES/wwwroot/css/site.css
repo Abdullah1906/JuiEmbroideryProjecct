@@ -116,18 +116,29 @@ header {
     border: none;
     outline: none;
     box-shadow: none;
+    background-color: transparent; /* Ensure background is transparent */
 }
 
 .navbar-toggler:focus {
     box-shadow: none;
 }
 
+/* Ensure navbar-toggler icon is visible in yellow on small devices */
+.navbar-toggler-icon {
+    /*  background-image: url("data:image/svg+xml,%3csvg xmlns='' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 0, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");*/
+        background-image: url('../img/icons8-menu-100.png');
+}
+
+/* Alternative approach using filter to make icon yellow */
+.navbar-toggler.yellow-toggler .navbar-toggler-icon {
+    filter: invert(89%) sepia(75%) saturate(10000%) hue-rotate(350deg) brightness(100%) contrast(100%);
+}
+
 .navbar-nav .nav-link {
     color: rgb(255, 255, 255) !important;
     margin: 0 15px;
-    font-bold: 500;
+    font-weight: 500;
     transition: all 0.3s ease;
-    font-weight: 700;
     position: relative;
     padding: 5px 0;
 }
@@ -1143,6 +1154,11 @@ footer::before {
     
     .footer-section {
         margin-bottom: 30px;
+    }
+    
+    /* Ensure navbar-toggler is clearly visible in yellow on small devices */
+    .navbar-toggler.yellow-toggler .navbar-toggler-icon {
+        filter: invert(89%) sepia(75%) saturate(10000%) hue-rotate(350deg) brightness(100%) contrast(100%);
     }
 }
 
