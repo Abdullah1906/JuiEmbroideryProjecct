@@ -19,7 +19,8 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #006400 0%, #8b0000 100%);
+            /* background: linear-gradient(135deg, #006400 0%, #8b0000 100%); */
+            background-color: #a7adb2;
         }
 
         .card {
@@ -39,6 +40,7 @@
 
         .form-floating Label {
             padding: .55rem .75rem;
+            font-size: 14px;
         }
         .input-icon {
             position: absolute;
@@ -104,16 +106,16 @@
                 <div class="col-md-6">
                     <div class="card shadow-lg border-0" style="margin-bottom:10px">
                         <div class="card-body p-5">
-                            <div class="text-center mb-2">
+                            @* <div class="text-center mb-2">
                                 <a asp-controller="Landing" asp-action="Index">
                                     <img src="~/logo/favicon.png" alt="Logo" width="60" class="mb-3" />
                                 </a>
-                            @*     <h3 class="fw-bold">Create an Account</h3>
-                                <p class="text-muted small">Join Jui Embrodiary and manage your Embrodiary easily</p> *@
-                            </div>
+                               @*  <h3 class="fw-bold">Create an Account</h3>
+                                <p class="text-muted small">Join Jui Embrodiary and manage your Embrodiary easily</p> 
+                            </div> *@
 
                             <form asp-action="RegisterAdmin" asp-controller="Registration" method="post" enctype="multipart/form-data">
-                                <div class="mb-4 text-center">
+                                <div class="mb-2 text-center">
                                     <div class="d-inline-block position-relative" style="width: 150px; height: 150px;">
                                         <img id="profileImagePreview" src="~/img/default.png"
                                              class="img-thumbnail rounded-circle shadow-sm"
@@ -145,7 +147,7 @@
                                     <!-- Email -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3 position-relative">
-                                            <input asp-for="U_EMAIL" class="form-control" placeholder="Email Address" />
+                                            <input asp-for="U_EMAIL" class="form-control" type="email" placeholder="Email Address" />
                                             <label asp-for="U_EMAIL">Email Address</label>
                                             <span asp-validation-for="U_EMAIL" class="text-danger small"></span>
                                         </div>
@@ -165,32 +167,33 @@
                                 <div class="row">
                                     <!-- Password -->
                                     <div class="col-md-6">
-                                        <div class="form-floating mb-3 position-relative">
-                                            <input asp-for="U_PASSWORD" type="password" class="form-control" id="U_PASSWORD" placeholder="Password" />
-                                            <label asp-for="U_PASSWORD">Password</label>
-                                            <button type="button" class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3" id="togglePassword" style="z-index: 10; border: none; background: none;">
-                                                <i class="bi bi-eye" id="eyeIcon"></i>
-                                            </button>
+                                        <div class="mb-3">
+                                            <div class="input-group">
+                                                <input asp-for="U_PASSWORD" type="password" class="form-control" placeholder="Password" />
+                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                    <i class="bi bi-eye" id="eyeIcon"></i>
+                                                </button>
+                                            </div>
                                             <span asp-validation-for="U_PASSWORD" class="text-danger small"></span>
                                         </div>
                                     </div>
 
                                     <!-- Confirm Password -->
                                     <div class="col-md-6">
-                                        <div class="form-floating mb-3 position-relative">
-                                            <input asp-for="U_CONFIRM_PASSWORD" type="password" class="form-control" id="U_CONFIRM_PASSWORD" placeholder="Confirm Password" />
-                                            <label asp-for="U_CONFIRM_PASSWORD">Confirm Password</label>
-                                            <button type="button" class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3" id="toggleConfirmPassword" style="z-index: 10; border: none; background: none;">
-                                                <i class="bi bi-eye" id="eyeIconConfirm"></i>
-                                            </button>
+                                        <div class="mb-3">
+                                            <div class="input-group">
+                                                <input asp-for="U_CONFIRM_PASSWORD" type="password" class="form-control" placeholder="Confirm Password" />
+                                                <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                                    <i class="bi bi-eye" id="eyeIconConfirm"></i>
+                                                </button>
+                                            </div>
                                             <span asp-validation-for="U_CONFIRM_PASSWORD" class="text-danger small"></span>
                                         </div>
                                     </div>
                                 </div>
 
-
                                 <!-- Submit -->
-                                <button type="submit" class="btn btn-success w-100">Register</button>
+                                <button type="submit" class="btn btn-success w-100" style="font-size: 18px;">Create Account</button>
 
                                 <!-- Error -->
                                 @if (!string.IsNullOrEmpty(ViewBag.error as string))
@@ -203,7 +206,7 @@
 
                             <hr>
                             <div class="text-center login-footer">
-                                <a asp-controller="Login" asp-action="Login">Already have an account? Sign in!</a>
+                                <a asp-controller="Login" asp-action="Login" style="font-size: 14px;">Already have an account? Sign in!</a>
                             </div>
                         </div>
                     </div>
@@ -214,7 +217,7 @@
 
     <!-- Footer -->
     <footer class="text-center text-white-50 py-3">
-        &copy; 2025 - ABD-PharmacyMS -
+        &copy; @DateTime.Now.Year - Jui Embroidery -
         <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white-50 text-decoration-none">Privacy</a>
     </footer>
 
@@ -228,7 +231,7 @@
     <!-- SweetAlert -->
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
+@*     <script>
         @if (TempData["Error"] != null)
         {
             <text>
@@ -250,7 +253,7 @@
                         });
             </text>
         }
-    </script>
+    </script> *@
 
     <script>
         // Password visibility toggle functionality
@@ -300,63 +303,32 @@
             }
         });
 
-        // $(document).ready(function () {
-        //     $('#registerForm').submit(function (e) {
-        //         e.preventDefault();
-
-        //         $.ajax({
-        //             type: 'POST',
-        //             url: '@Url.Action("RegisterAdmin", "Registration")',
-        //             data: $(this).serialize(),
-        //             success: function (response) {
-        //                 if (response.success) {
-        //                     Swal.fire({
-        //                         icon: 'success',
-        //                         title: 'Registered!',
-        //                         text: response.message,
-        //                         confirmButtonText: 'OK'
-        //                     }).then(() => {
-        //                         window.location.href = '@Url.Action("Login", "Login")';
-        //                     });
-        //                 } else {
-        //                     Swal.fire({
-        //                         icon: 'error',
-        //                         title: 'Oops!',
-        //                         text: response.message || 'Something went wrong!'
-        //                     });
-        //                 }
-        //             },
-        //             error: function () {
-        //                 Swal.fire({
-        //                     icon: 'error',
-        //                     title: 'Server Error',
-        //                     text: 'An unexpected error occurred. Please try again.'
-        //                 });
-        //             }
-        //         });
-        //     });
-        // });
+      
     </script>
-   
-        <script>
-            const imageInput = document.getElementById('profileImageInput');
-            const imagePreview = document.getElementById('profileImagePreview');
-            const clearBtn = document.getElementById('clearImageBtn');
 
-            // Live preview
-            imageInput.addEventListener('change', function () {
-                const [file] = imageInput.files;
-                if (file) {
-                    imagePreview.src = URL.createObjectURL(file);
-                }
-            });
+    <script>
+        const imageInput = document.getElementById('profileImageInput');
+        const imagePreview = document.getElementById('profileImagePreview');
+        const clearBtn = document.getElementById('clearImageBtn');
 
-            // Clear image
-            clearBtn.addEventListener('click', function () {
-                imageInput.value = ''; // Clear file input
-                imagePreview.src = '~/img/default.png'; // Reset preview
-            });
-        </script>
+        // Store default image path (resolved by Razor)
+        const defaultImageUrl = '@Url.Content("~/img/default.png")';
+
+        // Live preview
+        imageInput.addEventListener('change', function () {
+            const [file] = imageInput.files;
+            if (file) {
+                imagePreview.src = URL.createObjectURL(file);
+            }
+        });
+
+        // Clear image and restore default
+        clearBtn.addEventListener('click', function () {
+            imageInput.value = ''; // Clear file input
+            imagePreview.src = defaultImageUrl; // Reset preview
+        });
+    </script>
+
 
 
 </body>

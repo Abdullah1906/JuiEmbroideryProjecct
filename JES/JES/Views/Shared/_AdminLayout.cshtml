@@ -1,0 +1,615 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-Group Pharma</title>
+    <link rel="icon" type="image/png" href="@(Url.Content("~/logo/favicon.png"))" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KJ9SQ29X');</script>
+    <!-- End Google Tag Manager -->
+
+
+    <style>
+                body {
+            padding-top: 56px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+
+            background-color: #192a56;
+            color: white;
+            transition: transform 0.3s ease-in-out;
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: calc(100vh - 56px);
+            position: relative;
+        }
+
+        /* Sidebar content container */
+        .sidebar .offcanvas-body {
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar navigation list */
+        .sidebar .nav {
+            min-height: 100%;
+            padding-bottom: 2rem;
+        }
+
+        /* Sidebar scrollbar styling */
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 4px 0;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .sidebar::-webkit-scrollbar-corner {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Firefox scrollbar */
+        .sidebar {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.1);
+        }
+
+        /* Enhanced scrollbar for offcanvas-body */
+        .sidebar .offcanvas-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar .offcanvas-body::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 4px 0;
+        }
+
+        .sidebar .offcanvas-body::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .offcanvas-body::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+            .sidebar .nav-link.active {
+                background-color: #273c75;
+                font-weight: bold;
+            }
+
+        .submenu .nav-link.active {
+            background-color: #6c757d;
+            font-weight: bold;
+        }
+
+        .arrow {
+            margin-left: auto;
+            transition: transform 0.2s ease;
+        }
+
+        .collapse.show + .arrow,
+        .nav-link[aria-expanded="true"] .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Content area */
+        .content {
+            padding: 20px;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        /* Mobile sidebar behavior */
+        @@media (max-width: 991.98px) {
+            .sidebar {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 280px;
+                z-index: 1030;
+                transform: translateX(-100%);
+            }
+
+                .sidebar.show {
+                    transform: translateX(0);
+                }
+
+            .content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .sidebar-backdrop {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1025;
+                display: none;
+            }
+
+                .sidebar-backdrop.show {
+                    display: block;
+                }
+        }
+
+        /* Desktop sidebar behavior */
+        @@media (min-width: 992px) {
+            .sidebar {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 250px;
+                z-index: 1030;
+            }
+
+            .content {
+                margin-left: 250px;
+            }
+
+            .sidebar-toggle {
+                display: none !important;
+            }
+        }
+
+        /* Small screens adjustments */
+        @@media (max-width: 575.98px) {
+            .content {
+                padding: 15px 10px;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .user-dropdown .dropdown-toggle span {
+                display: none;
+            }
+        }
+
+        /* Medium screens adjustments */
+        @@media (min-width: 576px) and (max-width: 767.98px) {
+            .content {
+                padding: 15px;
+            }
+
+            .sidebar {
+                width: 300px;
+            }
+        }
+
+        /* Large screens and above */
+        @@media (min-width: 992px) {
+            .sidebar {
+                width: 250px;
+            }
+
+            .content {
+                margin-left: 250px;
+            }
+        }
+
+        /* Extra large screens */
+        @@media (min-width: 1200px) {
+            .content {
+                padding: 25px;
+            }
+        }
+
+        /* Footer */
+        footer.footeer {
+                  left: 0;
+                  bottom: 0;
+                  width: 100%;
+
+        }
+
+        /* Navigation improvements */
+        .nav-link {
+            padding: 0.75rem 1rem;
+            border-radius: 0.25rem;
+            margin: 0.125rem 0;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(2px);
+        }
+
+        /* Smooth scrolling for sidebar */
+        .sidebar,
+        .sidebar .offcanvas-body {
+            scroll-behavior: smooth;
+        }
+
+        /* Ensure all nav items are visible */
+        .sidebar .nav-item {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Better spacing for submenu items */
+        .submenu .nav-item {
+            margin-bottom: 0.125rem;
+        }
+
+                /* Submenu styling */
+        .submenu {
+            margin-left: 1rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 0.25rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+            overflow: hidden;
+        }
+
+        .submenu .nav-link {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            margin: 0.125rem 0;
+        }
+
+        .submenu .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Ensure submenu is visible when expanded */
+        .submenu.show {
+            display: block !important;
+        }
+
+        /* Reports submenu specific styling */
+        #submenu1 {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 0.25rem;
+            margin: 0.25rem 0;
+            padding: 0.5rem 0;
+        }
+
+        #submenu1.show {
+            display: block !important;
+        }
+
+        /* User dropdown improvements */
+        .user-dropdown .dropdown-toggle {
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+        }
+
+            .user-dropdown .dropdown-toggle:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+        /* Responsive table adjustments */
+        @@media (max-width: 767.98px) {
+            .table-responsive {
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Card improvements for mobile */
+        @@media (max-width: 575.98px) {
+            .card {
+                margin-bottom: 1rem;
+            }
+
+            .card-body {
+                padding: 1rem 0.75rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Fixed Header with User Dropdown -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #273c75;">
+        <div class="container-fluid">
+            <!-- Toggle button for sidebar (mobile only) -->
+            <button class="btn btn-outline-light d-lg-none me-2 sidebar-toggle" type="button" id="sidebarToggle">
+                <i class="bi bi-list"></i>
+            </button>
+            <a class="navbar-brand" href="#">Admin Panel</a>
+            <div class="d-flex align-items-center ms-auto">
+                <div class="dropdown user-dropdown">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="rounded-circle me-2" src="@(string.IsNullOrEmpty(User.FindFirst("ProfileImageUrl")?.Value)
+                                     ? "~/img/download.jpg"
+                                     : User.FindFirst("ProfileImageUrl")?.Value)"
+                                 alt="User" style="height:25px;width:25px">
+                            <span>@User.Identity.Name</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" asp-controller="Login" asp-action="Logout">Profile</a></li>
+                            <li><a class="dropdown-item" asp-controller="Login" asp-action="Logout">Logout</a></li>
+                        </ul>
+
+                      
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar p-3">
+        <ul class="nav flex-column" id="sidebarMenu">
+            <!-- Dashboard -->
+
+            <li class="nav-item">
+                <a class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")"
+                   asp-controller="Home" asp-action="Dashboard">
+                    <i class="bi bi-bar-chart me-2"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Landing" ? "active" : "")"
+                   asp-controller="Landing" asp-action="PrescriptionRequired">
+                    <i class="bi bi-capsule me-2"></i> Restrict Product
+                </a>
+            </li>
+            @*   <!-- Banner -->
+            <li class="nav-item">
+            <a class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Banner" ? "active" : "")"
+            asp-controller="Banner" asp-action="Create">
+            <i class="bi bi-image-alt me-2"></i> Banner
+            </a>
+            </li> *@
+
+
+            
+
+
+
+            <!-- Reports -->
+            <li class="nav-item">
+                <a class="nav-link text-white d-flex align-items-center justify-content-between @(ViewContext.RouteData.Values["controller"]?.ToString() == "Reports" ? "active" : "")"
+                   data-bs-toggle="collapse"
+                   href="#submenuReports"
+                   role="button"
+                   aria-expanded="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Reports" ? "true" : "false")"
+                   aria-controls="submenuReports">
+                    <span><i class="bi bi-file-earmark-text me-2"></i> Reports</span>
+                    <span class="arrow bi bi-chevron-down"></span>
+                </a>
+                <div class="collapse submenu @(ViewContext.RouteData.Values["controller"]?.ToString() == "Reports" ? "show" : "")" id="submenuReports">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-white @(ViewContext.RouteData.Values["action"]?.ToString() == "StockReport" ? "active" : "")"
+                               asp-controller="Reports" asp-action="StockReport">
+                                <i class="bi bi-boxes me-2"></i> Stocks
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white @(ViewContext.RouteData.Values["action"]?.ToString() == "SalesReport" ? "active" : "")"
+                               asp-controller="Reports" asp-action="SalesReport">
+                                <i class="bi bi-graph-up-arrow me-2"></i> Sales
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <!-- Settings -->
+            <li class="nav-item">
+                <a class="nav-link text-white d-flex align-items-center justify-content-between @(new[] {"Settings","Support"}.Contains(ViewContext.RouteData.Values["controller"]?.ToString()) ? "active" : "")"
+                   data-bs-toggle="collapse"
+                   href="#submenuSettings"
+                   role="button"
+                   aria-expanded="@(new[] {"Settings","Support"}.Contains(ViewContext.RouteData.Values["controller"]?.ToString()) ? "true" : "false")"
+                   aria-controls="submenuSettings">
+                    <span><i class="bi bi-gear me-2"></i> Settings</span>
+                    <span class="arrow bi bi-chevron-down"></span>
+                </a>
+                <div class="collapse submenu @(new[] {"Settings","Support"}.Contains(ViewContext.RouteData.Values["controller"]?.ToString()) ? "show" : "")" id="submenuSettings">
+                    <ul class="nav flex-column">
+                        @* Uncomment if you need profile view *@
+                        @* <li class="nav-item">
+                        <a class="nav-link text-white @(ViewContext.RouteData.Values["action"]?.ToString() == "Profile" ? "active" : "")"
+                        asp-controller="Settings" asp-action="Profile">
+                        <i class="bi bi-person-circle me-2"></i> View Profile
+                        </a>
+                        </li> *@
+                        <li class="nav-item">
+                            <a class="nav-link text-white @(ViewContext.RouteData.Values["action"]?.ToString() == "Edit" && ViewContext.RouteData.Values["controller"]?.ToString() == "Settings" ? "active" : "")"
+                               asp-controller="Settings" asp-action="Edit">
+                                <i class="bi bi-pencil-square me-2"></i> Profile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Support" && ViewContext.RouteData.Values["action"]?.ToString() == "CVList" ? "active" : "")"
+                               asp-controller="Support" asp-action="CVList">
+                                <i class="bi bi-file-earmark-person me-2"></i> CV
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
+
+        </ul>
+
+
+
+    </div>
+
+
+    <div class="content">
+
+        @RenderBody()
+
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ9SQ29X"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+    </div>
+
+
+    <footer class="footeer text-muted text-center" style="margin-bottom:10px">
+        <div class="container">
+            &copy; 2025 Reserved By - E-Group Pharma @* - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy </a>*@
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+   
+    <script src="~/js/sweetalert.js"></script>
+    <script src="~/js/admin/signlr.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script type="text/javascript">
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/orderHub")
+            .build();
+        connection.start()
+            .then(() => console.log("SignalR connected"))
+            .catch(err => console.error(err));
+
+
+
+    </script>
+    <script>
+        // Low stock poller to update navbar badge
+        (function () {
+            function updateLowStockBadge(count) {
+                var badge = document.getElementById('lowStockBadge');
+                if (!badge) return;
+                if (count && count > 0) {
+                    badge.textContent = count > 99 ? '99+' : count;
+                    badge.classList.remove('d-none');
+                } else {
+                    badge.classList.add('d-none');
+                }
+            }
+
+            function fetchLowStock() {
+                fetch('/Products/LowStockCount?threshold=10', { cache: 'no-store' })
+                    .then(r => r.json())
+                    .then(data => updateLowStockBadge(data.count))
+                    .catch(() => { });
+            }
+
+            document.addEventListener('visibilitychange', function () {
+                if (document.visibilityState === 'visible') fetchLowStock();
+            });
+
+            // initial fetch and interval
+            fetchLowStock();
+            setInterval(fetchLowStock, 20000);
+        })();
+    </script>
+    <script>
+        // Responsive sidebar functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+            // Toggle sidebar on mobile
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', function () {
+                    sidebar.classList.add('show');
+                    sidebarBackdrop.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            // Close sidebar when clicking backdrop
+            if (sidebarBackdrop) {
+                sidebarBackdrop.addEventListener('click', function () {
+                    closeSidebarMobile();
+                });
+            }
+
+            // Close sidebar on escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && sidebar.classList.contains('show')) {
+                    closeSidebarMobile();
+                }
+            });
+
+            // Close sidebar on window resize (desktop mode)
+            window.addEventListener('resize', function () {
+                if (window.innerWidth >= 992) {
+                    closeSidebarMobile();
+                }
+            });
+
+            function closeSidebarMobile() {
+                sidebar.classList.remove('show');
+                sidebarBackdrop.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+
+            // Auto-hide on nav link click (mobile only)
+            const sidebarLinks = sidebar.querySelectorAll('.nav-link');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    if (window.innerWidth < 992) {
+                        closeSidebarMobile();
+                    }
+                });
+            });
+        });
+
+
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLRTLCC8H9"></script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-QLRTLCC8H9');
+    </script>
+
+</body>
+</html>
+
+
+

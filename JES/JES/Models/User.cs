@@ -28,12 +28,12 @@ namespace JES.Models
     {
 
         public string? U_NAME { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         public string? U_EMAIL { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Phone Number is required")]
         public string? U_PHONE_NO { get; set; }
         public string? U_ADDRESS { get; set; }
-        [Required(ErrorMessage = "*Password required.")]
+        [Required(ErrorMessage = "*Password is required.")]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$",
         ErrorMessage = "Password must be at least 8 characters long and contain at least one lowercase, one uppercase, one number and one special character.")]
         public string? U_PASSWORD { get; set; }

@@ -116,7 +116,7 @@ namespace JES.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = "Admin registration successful!";
+            //TempData["Success"] = "Admin registration successful!";
             return RedirectToAction("Login", "Login");
         }
 
