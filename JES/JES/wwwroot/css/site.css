@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --primary-color: #0d2d69;
     --secondary-color: #b44ddc;
     --accent-color: #23b3b3;
@@ -174,14 +174,15 @@ header {
         top: 100%;
         left: 0;
         right: 0;
-        background: var(--primary-color);
+        background: #0000008a;
+        text-align:center;
         padding: 1rem;
         box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         border-top: 1px solid rgba(255,255,255,0.1);
     }
     
     .navbar-nav {
-        align-items: flex-start;
+        align-items: flex-center;
     }
     
     .navbar-nav .nav-link {
@@ -252,20 +253,26 @@ header {
 }
 
 .slide-1 {
-    background-image: url(https://static.vecteezy.com/system/resources/previews/036/594/871/large_2x/ai-generated-embroidery-background-with-copy-space-free-photo.jpg);
-      filter: brightness(95%);
+    background-image: url('../img/jui1.jpg');
+    filter: brightness(95%);
+    background-size: cover;
+    background-position: center;
 }
 
 .slide-2 {
-background-image: url(https://floss.maxxmint.com/images/cross_stitch.jpg);
-   filter: brightness(95%);
-
+    background-image: url('../img/jui2.jpg');
+    filter: brightness(95%);
+    background-size: cover;
+    background-position: center;
 }
 
 .slide-3 {
-    background-image: url(https://i.ytimg.com/vi/OHCFcNeZlbQ/maxresdefault.jpg);
-       filter: brightness(95%);
+    background-image: url('../img/jui3.jpg');
+    filter: brightness(95%);
+    background-size: cover;
+    background-position: center;
 }
+
 
 .hero-slide::before {
     content: '';
@@ -1180,3 +1187,31 @@ footer::before {
         font-size: 1.8rem;
     }
 }
+
+
+
+/*all team nav section*/
+
+.team-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+    .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    }
+
+.nav-pills .nav-link {
+    border-radius: 25px;
+    padding: 8px 20px;
+}
+
+    .nav-pills .nav-link.active {
+        background-color: var(--primary-color);
+        color: #fff;
+    }
+
+
