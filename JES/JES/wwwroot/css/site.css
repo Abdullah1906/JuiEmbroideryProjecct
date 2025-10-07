@@ -31,6 +31,7 @@ body {
     margin: 0;
     padding: 0;
     padding-top: 70px; /* Add padding to account for fixed navbar */
+    cursor: url('https://www.rw-designer.com/cursor-view/233849.png'), auto;
 }
 
 html {
@@ -438,17 +439,30 @@ section {
 
 .about-image {
     border-radius: 20px;
-    overflow: hidden;
     box-shadow: var(--light-shadow);
     animation: fadeInRight 1s ease;
-    height: 100%;
+    position: relative;
+    z-index: 2;
 }
 
-.about-image img {
+.video-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 400px;
+}
+
+.video-wrapper iframe {
+     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    border: none;
+    z-index: 2;
+    pointer-events: auto;
 }
+
 
 .about-stats {
     display: flex;
@@ -781,7 +795,7 @@ section {
 
 .contact-item i {
     font-size: 1.5rem;
-    color: var(--gold-accent);
+    color: var(--accent-color);
     margin-right: 20px;
     width: 40px;
     text-align: center;
@@ -877,6 +891,7 @@ footer::before {
     margin-bottom: 15px;
     line-height: 1.8;
     transition: opacity 0.3s ease;
+    color:white;
 }
 
 .footer-section p:hover {
@@ -889,6 +904,7 @@ footer::before {
     margin-bottom: 10px;
     transition: all 0.3s ease;
     text-decoration: none;
+
 }
 
 .footer-links a:hover {
