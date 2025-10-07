@@ -1,5 +1,4 @@
-﻿// Custom JavaScript for JUI Embroidery site
-
+﻿
 // Add animation classes when elements come into view
 document.addEventListener('DOMContentLoaded', function() {
     // Parallax effect for hero section
@@ -114,7 +113,6 @@ document.head.appendChild(style);
 
 // team navber
 
-<script>
     document.addEventListener("DOMContentLoaded", function () {
     const tabs = document.querySelectorAll("#teamTabs .nav-link");
     const tabPanes = document.querySelectorAll(".tab-pane");
@@ -139,5 +137,4 @@ document.head.appendChild(style);
         });
     });
 });
-</script>
 
