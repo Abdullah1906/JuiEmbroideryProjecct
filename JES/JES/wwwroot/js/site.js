@@ -110,3 +110,34 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+
+// team navber
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll("#teamTabs .nav-link");
+    const tabPanes = document.querySelectorAll(".tab-pane");
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", function () {
+            // Remove active class from all tabs
+            tabs.forEach(t => t.classList.remove("active"));
+            // Hide all tab panes
+            tabPanes.forEach(pane => {
+                pane.classList.remove("show", "active");
+            });
+
+            // Activate clicked tab
+            this.classList.add("active");
+            const target = document.querySelector(this.getAttribute("data-bs-target"));
+
+            // Show related content
+            if (target) {
+                target.classList.add("show", "active");
+            }
+        });
+    });
+});
+</script>
+
