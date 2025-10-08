@@ -409,10 +409,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Products" && (ViewContext.RouteData.Values["action"]?.ToString() == "Products" || ViewContext.RouteData.Values["action"]?.ToString() == "EditProducts") ? "active" : "")"
                                asp-controller="Product" asp-action="Products">
+                                <i class="bi bi-box-seam me-2"></i> Product
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Products" && (ViewContext.RouteData.Values["action"]?.ToString() == "Products" || ViewContext.RouteData.Values["action"]?.ToString() == "EditProducts") ? "active" : "")"
+                               asp-controller="Product" asp-action="ProductList">
                                 <i class="bi bi-box-seam me-2"></i> Product List
                             </a>
                         </li>
-                       
                     </ul>
                 </div>
             </li>

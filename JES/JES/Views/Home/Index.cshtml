@@ -1,4 +1,6 @@
-﻿﻿@{
+﻿@model List<Product>
+﻿
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -211,7 +213,19 @@
     </div>
 </section>
 
-@await Html.PartialAsync("_productpartial")
+<!-- Products Section -->
+<section id="products" class="products-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title fw-bold">Our Products</h2>
+            <p class="lead mt-3 text-muted">Wide range of embroidered products for various applications</p>
+        </div>
+
+        <!-- Render Partial with model -->
+        @await Html.PartialAsync("_ProductPartial", Model)
+    </div>
+</section>
+
 
 
 

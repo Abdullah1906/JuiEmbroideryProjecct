@@ -72,7 +72,17 @@ namespace JES.Controllers
             }
             return RedirectToAction("Category");
         }
+        public IActionResult ProductList()
+        {
+            var viewModel = new ProductIndexViewModel
+            {
+                Product = new ProductVm(),
+                Products = _context.Products.Include(p => p.Category).ToList(),
+                Categories = _context.Categories.ToList()
+            };
 
+            return View(viewModel); // ✅ Important
+        }
         public IActionResult Products()
         {
             var viewModel = new ProductIndexViewModel
@@ -117,6 +127,7 @@ namespace JES.Controllers
                     ProductName = product.ProductName,
                     CategoryId = product.CategoryId,
                     ImageUrl = imagePath,
+                    Description = product.Description,
                     IsActive = true,
                     IsDelete = false
                 };
@@ -165,6 +176,7 @@ namespace JES.Controllers
                 ProductName = product.ProductName,
                 CategoryId = product.CategoryId,
                 Category = product.Category,
+                Description = product.Description,
                 ExistingImageUrl = product.ImageUrl
             };
 
