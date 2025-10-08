@@ -3,74 +3,18 @@
 @{
 ViewData["Title"] = "Home Page";
 }
+<section class="video-container">
+    <div class="video-background">
+        <video autoplay loop muted playsinline class="background-video">
+            <source src="https://res.cloudinary.com/dsfst8a7g/video/upload/v1759901619/InShot_20251008_112932483_alyblq.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
-
-<!-- About Section -->
-<section id="about" class="about-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="about-content">
-                    <h2 class="section-title">About Us</h2>
-                    <h3 class="mb-4" style="color: var(--accent-color);">A.K Zaman</h3>
-                    <p class="lead mb-4">Managing Director at Computerized Embroidery</p>
-                    <p style="color: var(--text-light); font-size: 1.1rem;">
-                        We are a professional embroidery company specializing in computerized embroidery solutions.
-                        With state-of-the-art technology and skilled craftsmen, we deliver exceptional quality
-                        embroidery work for various applications.
-                    </p>
-                    <p style="color: var(--text-light); font-size: 1.1rem;">
-                        Our commitment to excellence and customer satisfaction has made us a trusted name
-                        in the embroidery industry. With over a decade of experience, we've perfected the art
-                        of transforming your vision into reality.
-                    </p>
-                    <div class="about-stats mt-4">
-                        <div class="stat-item">
-                            <i class="fas fa-calendar-check"></i>
-                            <h4>10+</h4>
-                            <p>Years Experience</p>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-project-diagram"></i>
-                            <h4>5000+</h4>
-                            <p>Projects Done</p>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-users"></i>
-                            <h4>200+</h4>
-                            <p>Happy Clients</p>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-award"></i>
-                            <h4>25+</h4>
-                            <p>Awards Won</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 gap-2">
-                <div class="about-image">
-                    <div class="row">
-                        <div class="video-wrapper">
-                            <iframe 
-                                width="100%" 
-                                src="https://www.youtube.com/embed/RTT3Gt9Cv58?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1"
-                                title="YouTube video player"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                                style="position: relative; z-index: 2; width: 100%; border-radius: 8px;">
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+    <div class="header-last">
+        <marquee class="text-white" behavior="scroll" direction="left" scrollamount="15" scrolldelay="100">"WE ARE EXPECTING TO GET SOME ORDERS OF EMBRODIERY WORKS FROM YOUR REPUTED FIRM, WHICH WILL BE HELPFUL FOR US FOR OUR FUTURE PROGRESS."</marquee>
     </div>
 </section>
-
 <!-- Services Section -->
 <section id="services" class="services-section">
     <div class="container">
@@ -168,6 +112,13 @@ ViewData["Title"] = "Home Page";
         @await Html.PartialAsync("_ProductPartial", Model)
     </div>
 </section>
+
+
+<!-- Core Customer Section -->
+
+
+
+
 
 <!-- Team Section -->
 <section id="team" class="team-section py-5">

@@ -54,7 +54,7 @@
     <div class="row g-4">
         @foreach (var product in Model)
         {
-            var maxLength = 80; // number of characters to show initially
+            var maxLength = 60; // number of characters to show initially
             var fullDescription = product.Description ?? "";
             var shortDescription = fullDescription.Length > maxLength
             ? fullDescription.Substring(0, maxLength) + "..."
@@ -63,13 +63,13 @@
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <div class="card h-100 shadow-sm border-0 product-card">
                     <div class="product-img-wrapper position-relative">
-                        <img src="@(Url.Content(product.ImageUrl ?? "~/img/default-product.png"))"
+                        <img src="@(Url.Content(product.ImageUrl ?? "~/img/download.jpg"))"
                              class="card-img-top"
                              alt="@product.ProductName"
                              style="height:200px; object-fit:cover; border-radius:10px;" />
-                        <div class="overlay d-flex align-items-center justify-content-center">
+                        @* <div class="overlay d-flex align-items-center justify-content-center">
                             <a href="#" class="btn btn-outline-light btn-sm">View Details</a>
-                        </div>
+                        </div> *@
                     </div>
                     <div class="card-body text-center">
                         <h5 class="card-title fw-semibold">@product.ProductName</h5>

@@ -1,0 +1,109 @@
+﻿@model CoreCustomerViewModel
+@{
+    ViewData["Title"] = "Core Customer Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; // adjust if different
+}
+
+<link href="https://kendo.cdn.telerik.com/2024.3.1010/styles/kendo.default-v2.min.css" rel="stylesheet" />
+<script src="https://kendo.cdn.telerik.com/2024.3.1010/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2024.3.1010/js/kendo.all.min.js"></script>
+
+<div class="container-fluid mt-4">
+    <h3 class="mb-4">Core Customer Management</h3>
+
+    <!-- Form Section -->
+    <form id="customerForm" asp-action="SaveCoreCustomer" enctype="multipart/form-data" method="post" class="card p-4 mb-4">
+        <input type="hidden" asp-for="CoreCustomer.Id" />
+        <input type="hidden" asp-for="CoreCustomer.ExistingImageUrl" />
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="CoreCustomer.CompanyName" class="form-label"></label>
+                <input asp-for="CoreCustomer.CompanyName" class="form-control" />
+                <span asp-validation-for="CoreCustomer.CompanyName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CoreCustomer.Address" class="form-label"></label>
+                <input asp-for="CoreCustomer.Address" class="form-control" />
+                <span asp-validation-for="CoreCustomer.Address" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="CoreCustomer.Phone" class="form-label"></label>
+                <input asp-for="CoreCustomer.Phone" class="form-control" />
+                <span asp-validation-for="CoreCustomer.Phone" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CoreCustomer.Email" class="form-label"></label>
+                <input asp-for="CoreCustomer.Email" class="form-control" />
+                <span asp-validation-for="CoreCustomer.Email" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="CoreCustomer.Image" class="form-label"></label>
+                <input asp-for="CoreCustomer.Image" type="file" class="form-control" />
+                @if (!string.IsNullOrEmpty(Model.CoreCustomer.ExistingImageUrl))
+                {
+                    <img src="@Model.CoreCustomer.ExistingImageUrl" alt="Customer Image" width="70" class="mt-2 rounded" />
+                }
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success me-2"><i class="k-icon k-i-save"></i> Save</button>
+            <a asp-action="Index" class="btn btn-secondary"><i class="k-icon k-i-cancel"></i> Reset</a>
+        </div>
+    </form>
+
+    <!-- Grid Section -->
+    <div id="customerGrid"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#customerGrid").kendoGrid({
+            dataSource: {
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.CoreCustomers)),
+                pageSize: 10
+            },
+            height: 500,
+            sortable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            columns: [
+                { field: "companyName", title: "Company Name", width: "180px" },
+                { field: "address", title: "Address", width: "200px" },
+                { field: "phone", title: "Phone", width: "130px" },
+                { field: "email", title: "Email", width: "180px" },
+                {
+                    field: "imageUrl",
+                    title: "Image",
+                    width: "100px",
+                    template: function (dataItem) {
+                        if (dataItem.imageUrl)
+                            return `<img src='${dataItem.imageUrl}' alt='Customer' width='50' height='50' class='rounded' />`;
+                        return "";
+                    }
+                },
+                {
+                    title: "Actions",
+                    width: "150px",
+                    template: function (dataItem) {
+                        return `
+                            <a href='/CoreCustomer/EditCoreCustomer/${dataItem.id}' class='k-button k-button-md k-rounded-md k-button-solid-warning me-2'>
+                                <span class='k-icon k-i-edit'></span> Edit
+                            </a>
+                            <a href='/CoreCustomer/DeleteCoreCustomer/${dataItem.id}' onclick="return confirm('Are you sure?');"
+                               class='k-button k-button-md k-rounded-md k-button-solid-danger'>
+                                <span class='k-icon k-i-delete'></span> Delete
+                            </a>`;
+                    }
+                }
+            ]
+        });
+    });
+</script>

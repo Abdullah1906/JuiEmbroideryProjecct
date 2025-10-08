@@ -4,6 +4,8 @@
     ViewData["Title"] = "Product Management";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+<link href="~/css/datatables.min.css" rel="stylesheet" />
 <style>
     @@media (max-width: 575.98px) {
         #ProductTable th:nth-child(10),
@@ -26,7 +28,24 @@
         border-color: rgba(0,0,0,.175) !important;
     }
 </style>
+
+
 <div class="row g-3 mb-4">
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3 rounded-circle bg-success-subtle" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
+                        <span class="text-success fw-bold">@Model.Products.Count()</span>
+                    </div>
+                    <div>
+                        <div class="fw-semibold">Total Products</div>
+                        <div class="text-muted small">Including all categories and companies</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-12 col-md-8">
         <div class="card border-0 shadow-sm">
             <div class="card-body py-3">
@@ -54,91 +73,94 @@
     </div>
 </div>
 
-<!-- Product List -->
-<div class="col-12">
-    <div class="card border-0 shadow-sm">
-        <div class="card-header bg-light d-flex align-items-center justify-content-between">
-            <h5 class="mb-0">Product List</h5>
-            <span class="text-muted small">Manage, edit and delete entries</span>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover align-middle" id="ProductTable">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="text-uppercase small text-muted">Image</th>
-                            <th class="text-uppercase small text-muted">Product Name</th>
-                            <th class="text-uppercase small text-muted">Category</th>
-                            <th class="text-uppercase small text-muted">Description</th>
-                            <th class="text-uppercase small text-muted text-center" style="width: 14%;">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Products)
-                        {
+<div class="row">
+    
+
+    <!-- Product List -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-light d-flex align-items-center justify-content-between">
+                <h5 class="mb-0">Product List</h5>
+                <span class="text-muted small">Manage, edit and delete entries</span>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle" id="ProductTable">
+                        <thead class="table-light">
                             <tr>
-                                <td>
-                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
-                                    {
-                                        <img src="@item.ImageUrl" style="height: 42px; width: 42px; object-fit: cover; border-radius: 6px;" alt="@item.ProductName" />
-                                    }
-                                    else
-                                    {
-                                        <span class="text-muted">—</span>
-                                    }
-                                </td>
-                                <td class="text-break">@item.ProductName</td>
-
-                                <td>
-                                    @if (!string.IsNullOrWhiteSpace(item.Category?.Name))
-                                    {
-                                        <span class="badge bg-light text-dark border">@item.Category?.Name</span>
-
-                                    }
-
-                                </td>
-                                <td class="text-break">@item.Description</td>
-
-                                <td class="text-center">
-                                    <div class="d-none d-sm-inline-flex btn-group" role="group" aria-label="Actions">
-                                        <a asp-action="EditProducts" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Edit product">
-                                            <i class="bi bi-pencil-square me-1"></i>
-                                        </a>
-                                        <a href="@Url.Action("DeleteProducts", new { id = item.Id })"
-                                           class="btn btn-sm btn-outline-danger delete-category"
-                                           data-category-name="@item.ProductName">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-
-                                    </div>
-                                    <div class="dropdown d-inline d-sm-none">
-                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Actions
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <li>
-                                                <a class="dropdown-item" asp-action="EditProducts" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="@Url.Action("DeleteProducts", new { id = item.Id })"
-                                                   class="btn btn-sm btn-outline-danger delete-category"
-                                                   data-category-name="@item.ProductName">
-                                                    <i class="bi bi-trash"></i>
-                                                </a>
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
+                                <th class="text-uppercase small text-muted">Image</th>
+                                <th class="text-uppercase small text-muted">Product Name</th>
+                                <th class="text-uppercase small text-muted">Category</th>
+                                <th class="text-uppercase small text-muted">Description</th>
+                                <th class="text-uppercase small text-muted text-center" style="width: 160px;">Actions</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Products)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                        {
+                                            <img src="@item.ImageUrl" style="height: 42px; width: 42px; object-fit: cover; border-radius: 6px;" alt="@item.ProductName" />
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">—</span>
+                                        }
+                                    </td>
+                                    <td class="text-break">@item.ProductName</td>
+
+                                    <td>
+                                        @if (!string.IsNullOrWhiteSpace(item.Category?.Name))
+                                        {
+                                            <span class="badge bg-light text-dark border">@item.Category?.Name</span>
+
+                                        }
+                                        
+                                    </td>
+                                    <td class ="justify-content-around">@item.Description</td>
+                                    
+                                    <td class="text-center">
+                                        <div class="d-none d-sm-inline-flex btn-group" role="group" aria-label="Actions">
+                                            <a asp-action="EditProducts" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Edit product">
+                                                <i class="bi bi-pencil-square me-1"></i>
+                                            </a>
+                                            <a href="@Url.Action("DeleteProducts", new { id = item.Id })"
+                                               class="btn btn-sm btn-outline-danger delete-category"
+                                               data-category-name="@item.ProductName">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+
+                                        </div>
+                                        <div class="dropdown d-inline d-sm-none">
+                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <a class="dropdown-item" asp-action="EditProducts" asp-route-id="@item.Id">Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("DeleteProducts", new { id = item.Id })"
+                                                       class="btn btn-sm btn-outline-danger delete-category"
+                                                       data-category-name="@item.ProductName">
+                                                        Delete
+                                                    </a>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 @section Scripts {
     @{
@@ -225,21 +247,22 @@
         });
     });
 
-    // $('#CategoryId').change(function () {
-    //     const selectedCategoryId = parseInt($(this).val()) || 0;
-    //     const subCategoryDropdown = $('#SubCategoryId');
+    $('#CategoryId').change(function () {
+        const selectedCategoryId = parseInt($(this).val()) || 0;
+        const subCategoryDropdown = $('#SubCategoryId');
 
-    //     // Reset dropdown
-    //     subCategoryDropdown.empty().append('<option value="">-- Select Sub Category --</option>');
+        // Reset dropdown
+        subCategoryDropdown.empty().append('<option value="">-- Select Sub Category --</option>');
 
-    //     // Filter subcategories from hidden list
-    //     $('#allSubCategories option').each(function () {
-    //         const optionCategoryId = parseInt($(this).data('category-id')) || 0;
-    //         if (optionCategoryId === selectedCategoryId) {
-    //             subCategoryDropdown.append($(this).clone());
-    //         }
-    //     });
-    // });
+        // Filter subcategories from hidden list
+        $('#allSubCategories option').each(function () {
+            const optionCategoryId = parseInt($(this).data('category-id')) || 0;
+            if (optionCategoryId === selectedCategoryId) {
+                subCategoryDropdown.append($(this).clone());
+            }
+        });
+    });
 
 </script>
+
 
