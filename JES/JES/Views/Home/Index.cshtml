@@ -1,8 +1,46 @@
-﻿@model List<Product>
+﻿@model HomeIndexViewModel
 @{
-ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
+<style>
+      .core-customer-section {
+        background: linear-gradient(135deg, #fefefe, #e6f0ff);
+    }
 
+    .customer-card {
+        background: #fff;
+        transition: transform 0.3s, box-shadow 0.3s;
+        padding: 1.5rem 1rem;
+    }
+
+    .customer-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    @@media (max-width: 575.98px) {
+        .customer-card {
+            padding: 1rem;
+        }
+    }
+    /* Change carousel arrow color */
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: #007bff; /* Change to any color you want */
+        border-radius: 50%; /* Makes the arrow background circular */
+        width: 40px;
+        height: 40px;
+        background-size: 50%, 50%; /* Adjust size if needed */
+    }
+
+        /* Optional: Add hover effect */
+        .carousel-control-prev-icon:hover,
+        .carousel-control-next-icon:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+
+</style>
 <section class="video-container">
     <div class="video-background">
         <video autoplay loop muted playsinline class="background-video">
@@ -109,12 +147,71 @@ ViewData["Title"] = "Home Page";
         </div>
 
         <!-- Render Partial with model -->
-        @await Html.PartialAsync("_ProductPartial", Model)
+        @await Html.PartialAsync("_ProductPartial", Model.Products)
     </div>
 </section>
 
 
-<!-- Core Customer Section -->
+
+<!-- Core Customer Slider Section -->
+<section id="core-customers" class="core-customer-section py-5" style="background-color:#f8f9fa;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title fw-bold" style="margin-bottom:0px">Our Core Customers</h2>
+            <p class="lead mt-3 text-muted">Trusted clients who rely on our embroidery solutions</p>
+        </div>
+
+        <div id="coreCustomerCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @{
+                    int chunkSize = 3; // Number of customers per slide
+                    var customerChunks = Model.CoreCustomers
+                                         .Select((c, i) => new { Customer = c, Index = i })
+                                         .GroupBy(x => x.Index / chunkSize)
+                                         .Select(g => g.Select(x => x.Customer).ToList())
+                                         .ToList();
+                }
+
+                @for (int i = 0; i < customerChunks.Count; i++)
+                {
+                    var chunk = customerChunks[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <div class="row justify-content-center">
+                            @foreach (var customer in chunk)
+                            {
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="customer-card text-center p-4 rounded shadow-sm">
+                                        @if (!string.IsNullOrEmpty(customer.ImageUrl))
+                                        {
+                                            <img src="@customer.ImageUrl" alt="@customer.CompanyName" 
+                                                 class="img-fluid mb-3 rounded-circle" 
+                                                 style="width:100px; height:100px; object-fit:cover;" />
+                                        }
+                                        <h5 class="fw-bold">@customer.CompanyName</h5>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#coreCustomerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#coreCustomerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+
+
 
 
 

@@ -20,9 +20,16 @@ namespace JES.Controllers
         {
             // Fetch products including category
             var products = _context.Products.Include(p => p.Category).ToList();
+          
+                var model = new HomeIndexViewModel
+                {
+                    Products = products,
+                    CoreCustomers = _context.CoreCustomers.ToList()
+                };
+                
 
             // Pass products to the view
-            return View(products);
+            return View(model);
         }
 
         public IActionResult Privacy()

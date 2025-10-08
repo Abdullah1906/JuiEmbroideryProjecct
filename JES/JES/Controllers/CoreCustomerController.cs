@@ -29,16 +29,16 @@ namespace JES.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SaveCoreCustomer(CoreCustomerVm coreCustomerVm)
+        public IActionResult SaveCoreCustomer(CoreCustomerViewModel coreCustomerVm)
         {
             if (ModelState.IsValid)
             {
-                string? imagePath = coreCustomerVm.ExistingImageUrl; // Keep existing image if none uploaded
+                string? imagePath = coreCustomerVm.CoreCustomer.ExistingImageUrl; // Keep existing image if none uploaded
 
                 // Handle image upload
-                if (coreCustomerVm.Image != null && coreCustomerVm.Image.Length > 0)
+                if (coreCustomerVm.CoreCustomer.Image != null && coreCustomerVm.CoreCustomer.Image.Length > 0)
                 {
-                    string fileName = Guid.NewGuid() + Path.GetExtension(coreCustomerVm.Image.FileName);
+                    string fileName = Guid.NewGuid() + Path.GetExtension(coreCustomerVm.CoreCustomer.Image.FileName);
                     string uploadsFolder = Path.Combine(_env.WebRootPath, "uploads", "customers");
 
                     if (!Directory.Exists(uploadsFolder))
@@ -46,7 +46,7 @@ namespace JES.Controllers
 
                     string filePath = Path.Combine(uploadsFolder, fileName);
                     using var fileStream = new FileStream(filePath, FileMode.Create);
-                    coreCustomerVm.Image.CopyTo(fileStream);
+                    coreCustomerVm.CoreCustomer.Image.CopyTo(fileStream);
 
                     imagePath = "/uploads/customers/" + fileName;
                 }
@@ -54,17 +54,17 @@ namespace JES.Controllers
                 // Map ViewModel to Entity
                 var customerEntity = new CoreCustomer
                 {
-                    Id = coreCustomerVm.Id,
-                    CompanyName = coreCustomerVm.CompanyName,
-                    Address = coreCustomerVm.Address,
-                    Phone = coreCustomerVm.Phone,
-                    Email = coreCustomerVm.Email,
+                    Id = coreCustomerVm.CoreCustomer.Id,
+                    CompanyName = coreCustomerVm.CoreCustomer.CompanyName,
+                    Address = coreCustomerVm.CoreCustomer.Address,
+                    Phone = coreCustomerVm.CoreCustomer.Phone,
+                    Email = coreCustomerVm.CoreCustomer.Email,
                     ImageUrl = imagePath,
                     IsActive = true,
                     IsDelete = false
                 };
 
-                if (coreCustomerVm.Id == 0)
+                if (coreCustomerVm.CoreCustomer.Id == 0)
                 {
                     customerEntity.CreatedBy = User.Identity?.Name;
                     customerEntity.CreatedAt = DateTime.UtcNow;
@@ -78,17 +78,17 @@ namespace JES.Controllers
                 }
 
                 _context.SaveChanges();
-                return RedirectToAction(nameof(CoreCustomer));
+                return RedirectToAction(nameof(Index));
             }
 
             // If validation fails, reload the view
             var viewModel = new CoreCustomerViewModel
             {
-                CoreCustomer = coreCustomerVm ?? new CoreCustomerVm(),
+                CoreCustomer = coreCustomerVm.CoreCustomer ?? new CoreCustomerVm(),
                 CoreCustomers = _context.CoreCustomers.ToList()
             };
 
-            return View("CoreCustomer", viewModel);
+            return View("Index", viewModel);
         }
 
         public IActionResult EditCoreCustomer(int id)
@@ -113,7 +113,7 @@ namespace JES.Controllers
                 CoreCustomers = _context.CoreCustomers.ToList()
             };
 
-            return View("CoreCustomer", viewModel);
+            return View("Index", viewModel);
         }
 
 

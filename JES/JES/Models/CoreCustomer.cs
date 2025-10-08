@@ -30,4 +30,11 @@ namespace JES.Models
         public string? ExistingImageUrl { get; set; }
 
     }
+
+    public class HomeIndexViewModel
+    {
+        public List<Product>? Products { get; set; }
+        public List<CoreCustomer>? CoreCustomers { get; set; }
+    }
+
 }
