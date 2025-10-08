@@ -1,5 +1,7 @@
+using JES.DB;
 using JES.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace JES.Controllers
@@ -7,15 +9,27 @@ namespace JES.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly DataContext _context;
+        public HomeController(ILogger<HomeController> logger,DataContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            // Fetch products including category
+            var products = _context.Products.Include(p => p.Category).ToList();
+          
+                var model = new HomeIndexViewModel
+                {
+                    Products = products,
+                    CoreCustomers = _context.CoreCustomers.ToList()
+                };
+                
+
+            // Pass products to the view
+            return View(model);
         }
 
         public IActionResult Privacy()
@@ -32,5 +46,7 @@ namespace JES.Controllers
         {
             return View();
         }
+     
+
     }
 }

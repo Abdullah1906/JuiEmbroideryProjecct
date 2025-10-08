@@ -1,4 +1,15 @@
-﻿
+//nav section
+document.addEventListener('DOMContentLoaded', function () {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    mobileMenuToggle.addEventListener('click', function () {
+        mobileMenu.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+    });
+});
+
+
 // Add animation classes when elements come into view
 document.addEventListener('DOMContentLoaded', function() {
     // Parallax effect for hero section
@@ -7,34 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrollPosition = window.pageYOffset;
         hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
     });
-
-    // Hero slider functionality
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.hero-slide');
-    const totalSlides = slides.length;
-
-    function showSlide(index) {
-        // Hide all slides
-        slides.forEach(slide => slide.classList.remove('active'));
-        
-        // Show the current slide
-        slides[index].classList.add('active');
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        showSlide(currentSlide);
-    }
-
-    // Auto change slides every 4 seconds
-    setInterval(nextSlide, 4000);
-
-    // Add animation to cards when they come into view
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

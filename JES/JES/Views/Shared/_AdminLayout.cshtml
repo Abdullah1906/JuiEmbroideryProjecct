@@ -381,18 +381,53 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Landing" ? "active" : "")"
-                   asp-controller="Landing" asp-action="PrescriptionRequired">
-                    <i class="bi bi-capsule me-2"></i> Restrict Product
+                <a class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "CoreCustomer" ? "active" : "")"
+                   asp-controller="CoreCustomer" asp-action="Index">
+                    <i class="bi bi-capsule me-2"></i> Core Customer
                 </a>
             </li>
-            @*   <!-- Banner -->
+            <!-- Products Menu -->
             <li class="nav-item">
-            <a class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Banner" ? "active" : "")"
-            asp-controller="Banner" asp-action="Create">
-            <i class="bi bi-image-alt me-2"></i> Banner
-            </a>
-            </li> *@
+                <a class="nav-link text-white d-flex align-items-center justify-content-between @(ViewContext.RouteData.Values["controller"]?.ToString() == "Product" ? "active" : "")"
+                   data-bs-toggle="collapse"
+                   href="#submenuProducts"
+                   role="button"
+                   aria-expanded="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Product" ? "true" : "false")"
+                   aria-controls="submenuProducts">
+                    <span><i class="bi bi-box-seam me-2"></i> Products</span>
+                    <span class="arrow bi bi-chevron-down"></span>
+                </a>
+
+                <div class="collapse submenu @(ViewContext.RouteData.Values["controller"]?.ToString() == "Product" ? "show" : "")" id="submenuProducts">
+                    <ul class="nav flex-column">
+
+                        <!-- Category -->
+                        <li class="nav-item">
+                            <a class="nav-link text-white @(ViewContext.RouteData.Values["action"]?.ToString() == "Category" || ViewContext.RouteData.Values["action"]?.ToString() == "EditCategory" ? "active" : "")"
+                               asp-controller="Product" asp-action="Category">
+                                <i class="bi bi-folder me-2"></i> Category
+                            </a>
+                        </li>
+
+                        <!-- Product -->
+                        <li class="nav-item">
+                            <a class="nav-link text-white @(ViewContext.RouteData.Values["action"]?.ToString() == "Products" || ViewContext.RouteData.Values["action"]?.ToString() == "EditProducts" ? "active" : "")"
+                               asp-controller="Product" asp-action="Products">
+                                <i class="bi bi-box-seam me-2"></i> Product
+                            </a>
+                        </li>
+
+                        <!-- Product List -->
+                        <li class="nav-item">
+                            <a class="nav-link text-white @(ViewContext.RouteData.Values["action"]?.ToString() == "ProductList" ? "active" : "")"
+                               asp-controller="Product" asp-action="ProductList">
+                                <i class="bi bi-box-seam me-2"></i> Product List
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
 
 
             

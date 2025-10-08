@@ -1,0 +1,290 @@
+﻿@model CoreCustomerViewModel
+
+@{
+    ViewData["Title"] = "Core Customer Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/css/datatables.min.css" rel="stylesheet" />
+<style>
+    #CoreCustomerTable td, #CoreCustomerTable th {
+        vertical-align: middle;
+    }
+
+    .text-break {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    .badge.border {
+        border-color: rgba(0,0,0,.175) !important;
+    }
+</style>
+
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h2 class="mb-1 text-dark">
+            <i class="bi bi-people-fill text-success me-2"></i>
+            Core Customer Management
+        </h2>
+        <p class="text-muted mb-0">Create, update, and manage your customers.</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a asp-action="CoreCustomer" class="btn btn-outline-secondary"><i class="bi bi-arrow-repeat me-1"></i>Refresh</a>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3 rounded-circle bg-success-subtle" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
+                        <span class="text-success fw-bold">@Model.CoreCustomers.Count()</span>
+                    </div>
+                    <div>
+                        <div class="fw-semibold">Total Customers</div>
+                        <div class="text-muted small">All companies in the system</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="row g-2 align-items-center">
+                    <div class="col-12 col-sm-8">
+                        <div class="input-group">
+                            <span class="input-group-text">Search</span>
+                            <input type="text" id="customerSearch" class="form-control" placeholder="Type to filter customers..." />
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-text">Show</span>
+                            <select id="customerPageLength" class="form-select">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Customer Form -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">@((Model.CoreCustomer.Id == 0) ? "Add Customer" : "Edit Customer")</h4>
+                    <span class="badge bg-white text-success">@((Model.CoreCustomer.Id == 0) ? "New" : $"ID: {Model.CoreCustomer.Id}")</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form asp-action="SaveCoreCustomer" enctype="multipart/form-data" method="post">
+                    <input type="hidden" asp-for="CoreCustomer.Id" />
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label asp-for="CoreCustomer.CompanyName" class="form-label">Company Name <span class="text-danger">*</span></label>
+                            <input asp-for="CoreCustomer.CompanyName" class="form-control" placeholder="Company Name" required />
+                            <span asp-validation-for="CoreCustomer.CompanyName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="CoreCustomer.Email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input asp-for="CoreCustomer.Email" type="email" class="form-control" placeholder="Email" required />
+                            <span asp-validation-for="CoreCustomer.Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <label asp-for="CoreCustomer.Phone" class="form-label">Phone <span class="text-danger">*</span></label>
+                            <input asp-for="CoreCustomer.Phone" class="form-control" placeholder="Phone" required />
+                            <span asp-validation-for="CoreCustomer.Phone" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-6">
+                            <label asp-for="CoreCustomer.Address" class="form-label">Address <span class="text-danger">*</span></label>
+                            <textarea asp-for="CoreCustomer.Address" class="form-control" placeholder="Address" rows="3" required></textarea>
+                            <span asp-validation-for="CoreCustomer.Address" class="text-danger"></span>
+                        </div>
+                        <!-- Customer Image -->
+                        <div class="col-md-6">
+                            <label asp-for="CoreCustomer.Image" class="form-label">Company Logo</label>
+                            <div class="position-relative">
+                                <div class="position-relative d-inline-block">
+                                    @if (!string.IsNullOrEmpty(Model.CoreCustomer?.ExistingImageUrl))
+                                    {
+                                        <img id="customerImagePreview" src="@Model.CoreCustomer.ExistingImageUrl" class="img-thumbnail" style="width:150px; height:150px; object-fit:cover;" />
+                                    }
+                                    else
+                                    {
+                                        <img id="customerImagePreview" src="/landing/images/Default.png" class="img-thumbnail d-none" style="width:150px; height:150px; object-fit:cover;" />
+                                    }
+                                    <span id="clearCustomerImageBtn"
+                                          style="position:absolute; top:5px; right:5px; color:red; font-size:24px; cursor:pointer; user-select:none;"
+                                          title="Clear Image">&times;</span>
+                                </div>
+                                <input asp-for="CoreCustomer.Image" type="file" class="form-control mt-2" id="customerImageInput" accept="image/*" />
+                                <input type="hidden" asp-for="CoreCustomer.ExistingImageUrl" />
+                                <span asp-validation-for="CoreCustomer.Image" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex gap-2 mt-3">
+                        <button type="submit" class="btn btn-primary flex-fill">@((Model.CoreCustomer.Id == 0) ? "Add Customer" : "Update Customer")</button>
+                        <a asp-action="CoreCustomer" class="btn btn-light border flex-fill">Clear</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer List -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-light d-flex align-items-center justify-content-between">
+                <h5 class="mb-0">Customer List</h5>
+                <span class="text-muted small">Manage, edit, and delete entries</span>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle" id="CoreCustomerTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Image</th>
+                                <th class="text-center">Company Details</th>
+                                <th class="text-center" style="width:15%;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CoreCustomers)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                        {
+                                            <img src="@item.ImageUrl" style="height:42px; width:42px; object-fit:cover; border-radius:6px;" />
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">—</span>
+                                        }
+                                    </td>
+                                    <!-- Company Details -->
+                                    <td class="text-break">
+                                        <strong>@item.CompanyName</strong><br />
+                                        <small>@item.Address</small><br />
+                                        <small>📞 @item.Phone | ✉️ @item.Email</small>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <div class="d-inline-flex btn-group" role="group">
+                                            <a asp-action="EditCoreCustomer" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i></a>
+                                            <a href="@Url.Action("DeleteCoreCustomer", new { id = item.Id })"
+                                               class="btn btn-sm btn-outline-danger delete-customer"
+                                               data-customer-name="@item.CompanyName">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/datatables.min.js"></script>
+<script>
+    const customerDt = new DataTable('#CoreCustomerTable', {
+        responsive: true,
+        pageLength: 10,
+        order: [],
+        lengthChange: false
+    });
+
+    const customerSearchInput = document.getElementById('customerSearch');
+    if (customerSearchInput) {
+        customerSearchInput.addEventListener('keyup', function () {
+            customerDt.search(this.value).draw();
+        });
+    }
+
+    const customerLengthSelect = document.getElementById('customerPageLength');
+    if (customerLengthSelect) {
+        customerLengthSelect.addEventListener('change', function () {
+            const val = parseInt(this.value || '10', 10);
+            customerDt.page.len(val).draw();
+        });
+    }
+
+    const imageInput = document.getElementById('customerImageInput');
+    const imagePreview = document.getElementById('customerImagePreview');
+    const clearBtn = document.getElementById('clearCustomerImageBtn');
+
+    imageInput.addEventListener('change', function (e) {
+        const [file] = e.target.files;
+        if (file) {
+            imagePreview.src = URL.createObjectURL(file);
+            imagePreview.classList.remove('d-none');
+            clearBtn.style.display = 'block';
+        }
+    });
+
+    clearBtn.addEventListener('click', function () {
+        imageInput.value = '';
+        imagePreview.src = '/landing/images/Default.png';
+        imagePreview.classList.add('d-none');
+        clearBtn.style.display = 'none';
+    });
+
+    if (imagePreview.classList.contains('d-none')) {
+        clearBtn.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-customer');
+
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const url = this.getAttribute('href');
+                const name = this.getAttribute('data-customer-name');
+
+                Swal.fire({
+                    title: `Delete "${name}"?`,
+                    text: "This action cannot be undone.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
+    });
+</script>
