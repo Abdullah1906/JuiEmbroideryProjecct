@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Models\User.cs~RF154363d.TMP" />
+    <None Remove="Views\Organogram\Index.cshtml~RF102ec8b.TMP" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 
 </Project>
