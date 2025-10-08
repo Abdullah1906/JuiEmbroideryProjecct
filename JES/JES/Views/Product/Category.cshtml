@@ -1,0 +1,261 @@
+﻿@model CategoryIndexViewModel
+
+@{
+    ViewData["Title"] = "Category Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    /* Responsive refinements */
+    @@media (max-width: 575.98px) {
+        #CategoryList th:nth-child(3),
+        #CategoryList td:nth-child(3) {
+            width: 1%;
+            white-space: nowrap;
+        }
+    }
+    #CategoryList td, #CategoryList th {
+        vertical-align: middle;
+    }
+    .text-break {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+</style>
+<link href="~/css/datatables.min.css" rel="stylesheet" />
+
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h2 class="mb-1 text-dark">
+            <i class="bi bi-tags-fill text-success me-2"></i>
+            Category Management
+        </h2>
+        <p class="text-muted mb-0">Create and manage product categories for your store.</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a asp-action="Category" class="btn btn-outline-secondary"><i class="bi bi-arrow-repeat me-1"></i>Refresh</a>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3 rounded-circle bg-success-subtle" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
+                        <span class="text-success fw-bold">@Model.Categories.Count()</span>
+                    </div>
+                    <div>
+                        <div class="fw-semibold">Total Categories</div>
+                        <div class="text-muted small">Currently active in your catalog</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="row g-2 align-items-center">
+                    <div class="col-12 col-sm-8">
+                        <div class="input-group">
+                            <span class="input-group-text">Search</span>
+                            <input type="text" id="categorySearch" class="form-control" placeholder="Type to filter categories..." />
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-text">Show</span>
+                            <select id="pageLength" class="form-select">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Form -->
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-success text-white">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">@((Model.Category.Id == 0) ? "Create Category" : "Edit Category")</h4>
+                    <span class="badge bg-white text-success">@((Model.Category.Id == 0) ? "New" : $"ID: {Model.Category.Id}")</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <form asp-action="SaveCategory" method="post" novalidate>
+                    <input type="hidden" asp-for="Category.Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="Category.Name" class="form-label">
+                            Category Name <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Category.Name" class="form-control" placeholder="e.g., Apparel Embroidery" required />
+                        <div class="form-text">Give your category a clear, concise name.</div>
+                        <span asp-validation-for="Category.Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Category.Description" class="form-label">Description</label>
+                        <input asp-for="Category.Description" class="form-control" placeholder="Optional short description" />
+                        <span asp-validation-for="Category.Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary flex-fill">
+                            @(Model.Category.Id == 0 ? "Add Category" : "Update Category")
+                        </button>
+                        <a asp-action="Category" class="btn btn-light border flex-fill">Clear</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- List -->
+    <div class="col-md-8">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+            <h4 class="mb-0">Category List</h4>
+            <span class="badge text-bg-light">@Model.Categories.Count() total</span>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle" id="CategoryList">
+                <thead>
+                    <tr>
+                        <th class="text-uppercase small text-muted">Name</th>
+                        <th class="text-uppercase small text-muted">Description</th>
+                        <th style="width: 160px;" class="text-uppercase small text-muted text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Categories)
+                    {
+                        <tr>
+                            <td class="text-break">@item.Name</td>
+                            <td class="text-break">@(string.IsNullOrWhiteSpace(item.Description) ? Html.Raw("<span class=\"text-muted fst-italic\">—</span>") : @item.Description)</td>
+                            <td class="text-center">
+                                <div class="d-none d-sm-inline-flex btn-group" role="group" aria-label="Actions">
+                                    <a asp-action="EditCategory" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Edit this category"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="@Url.Action("DeleteCategory", new { id = item.Id })"
+                                       class="btn btn-sm btn-outline-danger delete-category"
+                                       data-category-name="@item.Name">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                                <div class="dropdown d-inline d-sm-none">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a class="dropdown-item" asp-action="EditCategory" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("DeleteCategory", new { id = item.Id })"
+                                               class="btn btn-sm btn-outline-danger delete-category"
+                                               data-category-name="@item.Name">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>@* age javascript then datatables dite hobe*@
+<script src="~/js/datatables.min.js"></script>
+
+<script>
+    const dt = new DataTable('#CategoryList', {
+        pageLength: 10,
+        order: [],
+        lengthChange: false,
+        responsive: true
+    });
+
+    const searchInput = document.getElementById('categorySearch');
+    if (searchInput) {
+        searchInput.addEventListener('keyup', function () {
+            dt.search(this.value).draw();
+        });
+    }
+
+    const lengthSelect = document.getElementById('pageLength');
+    if (lengthSelect) {
+        lengthSelect.addEventListener('change', function () {
+            const val = parseInt(this.value || '10', 10);
+            dt.page.len(val).draw();
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-category');
+
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault(); // stop default link
+
+                const url = this.getAttribute('href');
+                const name = this.getAttribute('data-category-name');
+
+                Swal.fire({
+                    title: `Delete "${name}"?`,
+                    text: "This action cannot be undone.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // User confirmed, follow the link normally
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteLabel">Delete Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the category <strong><span id="deleteCategoryName"></span></strong>? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Cancel</button>
+                <a id="confirmDeleteBtn" href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+

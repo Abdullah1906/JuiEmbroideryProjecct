@@ -1,0 +1,120 @@
+﻿@model List<Product>
+
+<style>
+    .product-card {
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+    .product-img-wrapper {
+        position: relative;
+    }
+
+        .product-img-wrapper .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 10px;
+        }
+
+        .product-img-wrapper:hover .overlay {
+            opacity: 1;
+        }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .read-more {
+        color: #007bff;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+
+    @@media (max-width: 576px) {
+        .card-img-top {
+            height: 150px !important;
+        }
+    }
+</style>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row g-4">
+        @foreach (var product in Model)
+        {
+            var maxLength = 80; // number of characters to show initially
+            var fullDescription = product.Description ?? "";
+            var shortDescription = fullDescription.Length > maxLength
+            ? fullDescription.Substring(0, maxLength) + "..."
+            : fullDescription;
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                    <div class="product-img-wrapper position-relative">
+                        <img src="@(Url.Content(product.ImageUrl ?? "~/img/default-product.png"))"
+                             class="card-img-top"
+                             alt="@product.ProductName"
+                             style="height:200px; object-fit:cover; border-radius:10px;" />
+                        <div class="overlay d-flex align-items-center justify-content-center">
+                            <a href="#" class="btn btn-outline-light btn-sm">View Details</a>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-semibold">@product.ProductName</h5>
+                        <p class="text-muted mb-1">@product.Category?.Name</p>
+                        <p class="text-secondary small">
+                            <span class="short-text">@shortDescription</span>
+                            @if (fullDescription.Length > maxLength)
+                            {
+                                <span class="full-text d-none">@fullDescription</span>
+                                <span class="read-more">Read More</span>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="col-12 text-center text-muted">
+        <p>No products available at the moment.</p>
+    </div>
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const readMoreButtons = document.querySelectorAll(".read-more");
+
+        readMoreButtons.forEach(btn => {
+            btn.addEventListener("click", function () {
+                const parent = btn.closest(".card-body");
+                const shortText = parent.querySelector(".short-text");
+                const fullText = parent.querySelector(".full-text");
+
+                if (fullText.classList.contains("d-none")) {
+                    shortText.classList.add("d-none");
+                    fullText.classList.remove("d-none");
+                    btn.textContent = "Read Less";
+                } else {
+                    shortText.classList.remove("d-none");
+                    fullText.classList.add("d-none");
+                    btn.textContent = "Read More";
+                }
+            });
+        });
+    });
+</script>

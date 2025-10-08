@@ -1,0 +1,191 @@
+﻿@model LoginVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Jui Embrodiary</title>
+    <link rel="icon" type="image/png" href="@(Url.Content("~/logo/favicon.png"))" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MediPOS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .card {
+            border-radius: 1.5rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+            }
+
+        .form-floating input {
+            border-radius: 0.75rem;
+        }
+
+        .btn-success {
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+            .btn-success:hover {
+                background-color: #218838;
+                transform: scale(1.02);
+            }
+
+        .form-check-label {
+            font-size: 0.9rem;
+        }
+
+        .login-footer a {
+            color: #28a745;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+            .login-footer a:hover {
+                color: #1e7e34;
+                text-decoration: underline;
+            }
+
+        /* Password toggle button styling */
+        #togglePassword {
+            color: #6c757d;
+            transition: color 0.2s ease;
+        }
+
+            #togglePassword:hover {
+                color: #28a745;
+            }
+
+            #togglePassword:focus {
+                box-shadow: none;
+                outline: none;
+            }
+
+        .form-floating .form-control {
+            padding-right: 3rem;
+        }
+
+        .form-check .form-check-input {
+            float: left;
+            margin-left: -1.5em;
+            margin-top: .4em;
+        }
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <main class="flex-grow-1 d-flex align-items-center justify-content-center">
+        <div class="container">
+            <div class="row justify-content-center ">
+                <div class="col-md-5">
+                    <div class="card shadow-lg border-0 my-5">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <a asp-controller="Landing" asp-action="Index">
+                                    <img src="~/img/download.jpg" alt="Logo" width="60" class="mb-3" />
+                                </a>
+                                <h3 class="fw-bold">Welcome Back</h3>
+                                <p class="text-muted small">Sign in to continue to Jui Embroidery</p>
+                            </div>
+
+                            <form asp-action="Login" method="post">
+                                <!-- Username -->
+                                <div class="form-floating mb-3">
+                                    <input asp-for="U_EMAIL" type="text" class="form-control" id="U_EMAIL" placeholder="User Email">
+                                    <label for="U_EMAIL">Enter Email</label>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="form-floating mb-3 position-relative">
+                                    <input asp-for="U_PASSWORD" type="password" class="form-control" id="U_PASSWORD" placeholder="Password">
+                                    <label for="U_PASSWORD">Password</label>
+                                    <button type="button" class="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3" id="togglePassword" style="z-index: 10; border: none; background: none;">
+                                        <i class="bi bi-eye" id="eyeIcon"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Remember Me & Forgot Password -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    </div>
+                                    <a asp-controller="Login" asp-action="ForgetPassword" class="small">Forgot password?</a>
+                                </div>
+
+                                <!-- Submit -->
+                                <button type="submit" class="btn btn-success w-100">Sign In</button>
+
+                                <!-- Error Message -->
+                                @if (!string.IsNullOrEmpty(ViewBag.error as string))
+                                {
+                                    <div class="alert alert-danger mt-3 text-center" role="alert">
+                                        @ViewBag.error
+                                    </div>
+                                }
+                            </form>
+
+                            <hr>
+
+                            <div class="text-center login-footer">
+                                <a asp-controller="Registration" asp-action="Register">Create an Account!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-Black-50 py-2">
+        &copy; @DateTime.Now.Year - Jui Embroidery
+        <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-dark text-decoration-none">Privacy</a>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('U_PASSWORD');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            togglePassword.addEventListener('click', function() {
+                // Toggle password visibility
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                // Toggle eye icon
+                if (type === 'text') {
+                    eyeIcon.classList.remove('bi-eye');
+                    eyeIcon.classList.add('bi-eye-slash');
+                } else {
+                    eyeIcon.classList.remove('bi-eye-slash');
+                    eyeIcon.classList.add('bi-eye');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
