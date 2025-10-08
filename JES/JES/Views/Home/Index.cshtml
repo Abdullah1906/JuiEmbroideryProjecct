@@ -1,7 +1,7 @@
 ﻿@model List<Product>
-﻿
+﻿ 
 @{
-    ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Home Page";
 }
 
 
@@ -48,24 +48,24 @@
                     </div>
                 </div>
             </div>
-        
-<div class="col-lg-6 gap-2">
-    <div class="about-image">
-        <div class="row">
-            <div class="video-wrapper">
-                <iframe 
-                    width="100%" 
-                    src="https://www.youtube.com/embed/RTT3Gt9Cv58?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    style="position: relative; z-index: 2; width: 100%; border-radius: 8px;">
-                </iframe>
+
+            <div class="col-lg-6 gap-2">
+                <div class="about-image">
+                    <div class="row">
+                        <div class="video-wrapper">
+                            <iframe 
+                                width="100%" 
+                                src="https://www.youtube.com/embed/RTT3Gt9Cv58?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                style="position: relative; z-index: 2; width: 100%; border-radius: 8px;">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
 
         </div>
     </div>
@@ -155,6 +155,7 @@
     </div>
 </section>
 
+
 <!-- Products Section -->
 <section id="products" class="products-section py-5">
     <div class="container">
@@ -167,9 +168,6 @@
         @await Html.PartialAsync("_ProductPartial", Model)
     </div>
 </section>
-
-
-
 
 <!-- Team Section -->
 <section id="team" class="team-section py-5">

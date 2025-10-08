@@ -1,4 +1,5 @@
-﻿﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,44 +14,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧵</text></svg>">
 </head>
-<<<<<<< Updated upstream
 
-<style>
-    @@media (min-width: 992px) {
-        .navbar-expand-lg .navbar-nav .nav-link {
-            padding-right: 0;
-            padding-left: 0;
-        }
-    }
-</style>
-
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg sticky-top">
-            <div class="container">
-                <a class="navbar-brand" href="#home">
-                    <i class="fas fa-thread"></i> JUI Embroidery
-                </a>
-                <button class="navbar-toggler yellow-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#accessories">Accessories</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#organogram">Organogram</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Login" asp-action="Login">Login</a></li>
-                    </ul>
-                </div>
-=======
 <body>
     <header>
         <main>
@@ -87,7 +55,7 @@
                 <a href="#organogram">Organogram</a>
                 <a href="#contact">Contact</a>
                 <a asp-controller="Login" asp-action="Login">Login</a>
->>>>>>> Stashed changes
+
             </div>
         </nav>
         <div class="video-background">
@@ -148,7 +116,7 @@
                     <p>
                         <i class="fas fa-map-marker-alt me-2"></i> House-25, Road-45, Rajabari, Block-D
                         Turag, Dhaka-1230
-                     </p>
+                    </p>
                     <p><i class="fas fa-phone me-2"></i><a class="text-white text-decoration-none" href="tel:01911139260"> 01911139260</a></p>
                     <p><i class="fas fa-envelope me-2"></i> <a href="mailto:juiembroidery23@gmail.com" class="text-white text-decoration-none"> juiembroidery23@gmail.com</a></p>
                     <p><i class="fas fa-clock me-2"></i> Open: 9:00 AM - 6:00 PM</p>
@@ -156,7 +124,7 @@
             </div>
             <div class="footer-bottom text-warning">
                 <p>&copy; @DateTime.Now.Year JUI Embroidery. All rights reserved.</p>
-                
+
             </div>
         </div>
     </footer>
@@ -166,7 +134,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loader/1.8.3/angular-loader.min.js" integrity="sha512-5B2inMztrwjhYyM0FFN9iOqyppQVgGxkDnAqv7/ppklxHntSNclgnuOi3uZvoZP+eXdmHk7xDTm0Odm5CzrXgA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+
     <script>
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -191,7 +159,7 @@
         });
 
         // Navbar scroll effect
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
@@ -215,17 +183,17 @@
             });
         }, observerOptions);
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Observe elements for animation
             document.querySelectorAll('.service-card, .product-card, .team-card, .about-content').forEach(el => {
                 observer.observe(el);
             });
-            
+
             // Set active nav link based on scroll position
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
-            
-            window.addEventListener('scroll', function() {
+
+            window.addEventListener('scroll', function () {
                 let current = '';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
@@ -234,7 +202,7 @@
                         current = section.getAttribute('id');
                     }
                 });
-                
+
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === '#' + current) {
