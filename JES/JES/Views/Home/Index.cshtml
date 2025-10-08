@@ -211,95 +211,9 @@
     </div>
 </section>
 
-<!-- Products Section -->
-<section id="products" class="products-section">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="section-title">Our Products</h2>
-            <p class="lead mt-3">Wide range of embroidered products for various applications</p>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="product-card">
-                    <div class="product-icon">
-                        <i class="fas fa-tshirt"></i>
-                    </div>
-                    <div class="product-body">
-                        <h4>Apparel Embroidery</h4>
-                        <p style="color: var(--text-light);">
-                            Professional embroidery on shirts, jackets, uniforms, and all types of clothing.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card">
-                    <div class="product-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <div class="product-body">
-                        <h4>Corporate Branding</h4>
-                        <p style="color: var(--text-light);">
-                            Logo embroidery for corporate wear, promotional items, and business merchandise.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card">
-                    <div class="product-icon">
-                        <i class="fas fa-bed"></i>
-                    </div>
-                    <div class="product-body">
-                        <h4>Home Textiles</h4>
-                        <p style="color: var(--text-light);">
-                            Beautiful embroidered designs for cushions, curtains, bed linens, and home décor.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card">
-                    <div class="product-icon">
-                        <i class="fas fa-baseball-ball"></i>
-                    </div>
-                    <div class="product-body">
-                        <h4>Sports Apparel</h4>
-                        <p style="color: var(--text-light);">
-                            Team logos, player names, and numbers on sports uniforms and accessories.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card">
-                    <div class="product-icon">
-                        <i class="fas fa-hat-cowboy"></i>
-                    </div>
-                    <div class="product-body">
-                        <h4>Caps & Hats</h4>
-                        <p style="color: var(--text-light);">
-                            Precision embroidery on caps, hats, and headwear for fashion and branding.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card">
-                    <div class="product-icon">
-                        <i class="fas fa-gift"></i>
-                    </div>
-                    <div class="product-body">
-                        <h4>Custom Gifts</h4>
-                        <p style="color: var(--text-light);">
-                            Personalized embroidered items perfect for gifts, special occasions, and events.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@await Html.PartialAsync("_productpartial")
+
+
 
 <!-- Team Section -->
 <section id="team" class="team-section py-5">

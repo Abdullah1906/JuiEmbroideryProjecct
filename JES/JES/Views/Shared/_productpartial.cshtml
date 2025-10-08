@@ -1,0 +1,44 @@
+﻿@model List<Product>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section id="products" class="products-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Our Products</h2>
+            <p class="lead mt-3">Wide range of embroidered products for various applications</p>
+        </div>
+
+        <div class="row g-4">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var product in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <div class="product-icon text-center mb-3">
+                                <img src="@(Url.Content(product.ImageUrl ?? "~/img/default-product.png"))"
+                                     alt="@product.ProductName"
+                                     style="width:70px; height:70px; object-fit:cover;" />
+                            </div>
+                            <div class="product-body text-center">
+                                <h4>@product.ProductName</h4>
+                                <p style="color: var(--text-light);">
+                                    @product.Category?.Name
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="text-center text-muted">
+                    <p>No products available at the moment.</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>

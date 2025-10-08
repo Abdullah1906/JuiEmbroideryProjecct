@@ -124,7 +124,7 @@ namespace JES.Controllers
             HttpContext.Session.Clear();
 
 
-            return RedirectToAction("Index", "Landing");
+            return RedirectToAction("Index", "Home");
         }
         public IActionResult ForgetPassword()
         {

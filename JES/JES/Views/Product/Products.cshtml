@@ -1,0 +1,356 @@
+﻿@model ProductIndexViewModel
+
+@{
+    ViewData["Title"] = "Product Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/css/datatables.min.css" rel="stylesheet" />
+<style>
+    @@media (max-width: 575.98px) {
+        #ProductTable th:nth-child(10),
+        #ProductTable td:nth-child(10) {
+            width: 1%;
+            white-space: nowrap;
+        }
+    }
+
+    #ProductTable td, #ProductTable th {
+        vertical-align: middle;
+    }
+
+    .text-break {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    .badge.border {
+        border-color: rgba(0,0,0,.175) !important;
+    }
+</style>
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+        <h2 class="mb-1 text-dark">
+            <i class="bi bi-box-seam-fill text-success me-2"></i>
+            Product Management
+        </h2>
+        <p class="text-muted mb-0">Create, update, and manage your products.</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a asp-action="Products" class="btn btn-outline-secondary"><i class="bi bi-arrow-repeat me-1"></i>Refresh</a>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-12 col-md-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="d-flex align-items-center">
+                    <div class="me-3 rounded-circle bg-success-subtle" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
+                        <span class="text-success fw-bold">@Model.Products.Count()</span>
+                    </div>
+                    <div>
+                        <div class="fw-semibold">Total Products</div>
+                        <div class="text-muted small">Including all categories and companies</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body py-3">
+                <div class="row g-2 align-items-center">
+                    <div class="col-12 col-sm-8">
+                        <div class="input-group">
+                            <span class="input-group-text">Search</span>
+                            <input type="text" id="productSearch" class="form-control" placeholder="Type to filter products..." />
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4">
+                        <div class="input-group">
+                            <span class="input-group-text">Show</span>
+                            <select id="productPageLength" class="form-select">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Product Form -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">@((Model.Product.Id == 0) ? "Add Product" : "Edit Product")</h4>
+                    <span class="badge bg-white text-success">@((Model.Product.Id == 0) ? "New" : $"ID: {Model.Product.Id}")</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form asp-action="SaveProducts" enctype="multipart/form-data" method="post" novalidate>
+                    <input type="hidden" asp-for="Product.Id" />
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Product.ProductName" class="form-label">Product Name <span class="text-danger">*</span></label>
+                            <input asp-for="Product.ProductName" class="form-control" placeholder="e.g., Paracetamol 500mg" required />
+                            <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Product.CategoryId" class="form-label">Category <span class="text-danger">*</span></label>
+                            <select asp-for="Product.CategoryId" class="form-select" id="CategoryId" required>
+                                <option value="">-- Select Category --</option>
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+                            </select>
+                            <div class="form-text">Choose the main category.</div>
+                            <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                        </div>
+                        
+                    </div>
+
+                    
+                    <div class="row g-3 mt-3">
+                        <!-- Description -->
+                        <div class="col-md-8">
+                            <label asp-for="Product.Description" class="form-label">Description <span class="text-danger">*</span></label>
+                            <textarea asp-for="Product.Description" class="form-control" rows="5" placeholder="Enter product description" required></textarea>
+                            <span asp-validation-for="Product.Description" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label asp-for="Product.Image" class="form-label">Product Image</label>
+                            <div class="position-relative" style="max-width: 300px;">
+                                <div class="position-relative d-inline-block">
+                                    @if (!string.IsNullOrEmpty(Model.Product?.ExistingImageUrl))
+                                    {
+                                        <img id="imagePreview" src="@Model.Product.ExistingImageUrl" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;" alt="Image Preview" />
+                                    }
+                                    else
+                                    {
+                                        <img id="imagePreview" src="/landing/images/Default.png" class="img-thumbnail d-none" style="width: 150px; height: 150px; object-fit: cover;" alt="Image Preview" />
+                                    }
+                                    <span id="clearImageBtn"
+                                          style="position: absolute; top: 5px; right: 5px; color: red; font-size: 24px; font-weight: bold; cursor: pointer; user-select: none; line-height: 1;"
+                                          title="Clear Image">&times;</span>
+                                </div>
+                                <input asp-for="Product.Image" type="file" class="form-control mt-2" id="imageInput" accept="image/*" />
+                                <input type="hidden" asp-for="Product.ExistingImageUrl" />
+                                <span asp-validation-for="Product.Image" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="d-flex gap-2 mt-3">
+                        <button type="submit" class="btn btn-primary flex-fill" data-bs-toggle="tooltip" data-bs-title="Save product">@(Model.Product.Id == 0 ? "Add Product" : "Update Product")</button>
+                        <a asp-action="Products" class="btn btn-light border flex-fill" data-bs-toggle="tooltip" data-bs-title="Clear form">Clear</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Product List -->
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-light d-flex align-items-center justify-content-between">
+                <h5 class="mb-0">Product List</h5>
+                <span class="text-muted small">Manage, edit and delete entries</span>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle" id="ProductTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="text-uppercase small text-muted">Image</th>
+                                <th class="text-uppercase small text-muted">Product Name</th>
+                                <th class="text-uppercase small text-muted">Category</th>
+                                <th class="text-uppercase small text-muted text-center" style="width: 160px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Products)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                        {
+                                            <img src="@item.ImageUrl" style="height: 42px; width: 42px; object-fit: cover; border-radius: 6px;" alt="@item.ProductName" />
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">—</span>
+                                        }
+                                    </td>
+                                    <td class="text-break">@item.ProductName</td>
+
+                                    <td>
+                                        @if (!string.IsNullOrWhiteSpace(item.Category?.Name))
+                                        {
+                                            <span class="badge bg-light text-dark border">@item.Category?.Name</span>
+
+                                        }
+                                        
+                                    </td>
+                                    
+                                    <td class="text-center">
+                                        <div class="d-none d-sm-inline-flex btn-group" role="group" aria-label="Actions">
+                                            <a asp-action="EditProducts" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Edit product">
+                                                <i class="bi bi-pencil-square me-1"></i>
+                                            </a>
+                                            <a href="@Url.Action("DeleteProducts", new { id = item.Id })"
+                                               class="btn btn-sm btn-outline-danger delete-category"
+                                               data-category-name="@item.ProductName">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+
+                                        </div>
+                                        <div class="dropdown d-inline d-sm-none">
+                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Actions
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <a class="dropdown-item" asp-action="EditProducts" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("DeleteProducts", new { id = item.Id })"
+                                                       class="btn btn-sm btn-outline-danger delete-category"
+                                                       data-category-name="@item.ProductName">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/datatables.min.js"></script>
+
+<script>
+    const productDt = new DataTable('#ProductTable', {
+        responsive: true,
+        pageLength: 10,
+        order: [],
+        lengthChange: false
+    });
+
+    const productSearchInput = document.getElementById('productSearch');
+    if (productSearchInput) {
+        productSearchInput.addEventListener('keyup', function () {
+            productDt.search(this.value).draw();
+        });
+    }
+
+    const productLengthSelect = document.getElementById('productPageLength');
+    if (productLengthSelect) {
+        productLengthSelect.addEventListener('change', function () {
+            const val = parseInt(this.value || '10', 10);
+            productDt.page.len(val).draw();
+        });
+    }
+
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const clearBtn = document.getElementById('clearImageBtn');
+
+    imageInput.addEventListener('change', function (event) {
+        const [file] = event.target.files;
+        if (file) {
+            imagePreview.src = URL.createObjectURL(file);
+            imagePreview.classList.remove('d-none');
+            clearBtn.style.display = 'block';
+        }
+    });
+
+    clearBtn.addEventListener('click', function () {
+        imageInput.value = '';
+        imagePreview.src = '/landing/images/Default.png';
+        imagePreview.classList.add('d-none');
+        clearBtn.style.display = 'none';
+
+    });
+
+    if (imagePreview.classList.contains('d-none')) {
+        clearBtn.style.display = 'none';
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-category');
+
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault(); // stop default link
+
+                const url = this.getAttribute('href');
+                const name = this.getAttribute('data-category-name');
+
+                Swal.fire({
+                    title: `Delete "${name}"?`,
+                    text: "This action cannot be undone.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // User confirmed, follow the link normally
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
+    });
+
+    $('#CategoryId').change(function () {
+        const selectedCategoryId = parseInt($(this).val()) || 0;
+        const subCategoryDropdown = $('#SubCategoryId');
+
+        // Reset dropdown
+        subCategoryDropdown.empty().append('<option value="">-- Select Sub Category --</option>');
+
+        // Filter subcategories from hidden list
+        $('#allSubCategories option').each(function () {
+            const optionCategoryId = parseInt($(this).data('category-id')) || 0;
+            if (optionCategoryId === selectedCategoryId) {
+                subCategoryDropdown.append($(this).clone());
+            }
+        });
+    });
+
+</script>
+
+
+
