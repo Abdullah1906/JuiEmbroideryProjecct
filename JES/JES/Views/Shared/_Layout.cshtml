@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,12 +9,15 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JES.styles.css" asp-append-version="true" />
-  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js" integrity="sha512-nKXmKvJyiGQy343jatQlzDprflyB5c+tKCzGP3Uq67v+lmzfnZUi/ZT+fc6ITZfSC5HhaBKUIvr/nTLCV+7F+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧵</text></svg>">
 </head>
+<<<<<<< Updated upstream
 
 <body>
     <header>
@@ -36,9 +39,59 @@
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     </ul>
                 </div>
+=======
+<body>
+    <header>
+        <main>
+            <div class="first-container">
+                <div class="logo text-center"><a class="text-light" href="/">Jui Embroidery</a></div>
+                <p>Innovation, Productivity & Environment for Sustainable Business.</p>
+                <div class="collection text-center"><img src="~/img/collection.png" /> <br>info@juitembroidery.com</div>
+            </div>
+        </main>
+        <nav>
+            <div class="navber">
+                <a href="/">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#products">Products</a>
+                <a href="#accessories">Accessories</a>
+                <a href="#organogram">Organogram</a>
+                <a href="#contact">Contact</a>
+                <a asp-controller="Login" asp-action="Login">Login</a>
+            </div>
+            <!-- Mobile menu toggle -->
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <!-- Mobile menu -->
+            <div class="mobile-menu">
+                <a href="/">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#products">Products</a>
+                <a href="#accessories">Accessories</a>
+                <a href="#organogram">Organogram</a>
+                <a href="#contact">Contact</a>
+                <a asp-controller="Login" asp-action="Login">Login</a>
+>>>>>>> Stashed changes
             </div>
         </nav>
+        <div class="video-background">
+            <video autoplay loop muted playsinline class="background-video">
+                <source src="https://res.cloudinary.com/dsfst8a7g/video/upload/v1759901619/InShot_20251008_112932483_alyblq.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="header-last">
+            <marquee behavior="scroll" direction="left">"WE ARE EXPECTING TO GET SOME ORDERS OF EMBRODIERY WORKS FROM YOUR REPUTED FIRM, WHICH WILL BE HELPFUL FOR US FOR OUR FUTURE PROGRESS."</marquee>
+        </div>
+
     </header>
+
     <div class="container-fluid p-0">
         <main role="main" class="p-0">
             @RenderBody()
@@ -103,6 +156,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loader/1.8.3/angular-loader.min.js" integrity="sha512-5B2inMztrwjhYyM0FFN9iOqyppQVgGxkDnAqv7/ppklxHntSNclgnuOi3uZvoZP+eXdmHk7xDTm0Odm5CzrXgA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
     <script>
         // Smooth scrolling
