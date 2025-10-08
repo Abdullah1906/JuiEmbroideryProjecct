@@ -1,4 +1,4 @@
-﻿:root {
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿:root {
     --primary-color: #0d2d69;
     --secondary-color: #b44ddc;
     --accent-color: #23b3b3;
@@ -13,7 +13,6 @@
     --dark-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-/*fuull nav section with video*/
 * {
     margin: 0;
     padding: 0;
@@ -34,7 +33,15 @@ header {
 
 nav {
     background-color: #01325d;
-    padding: 1.5rem;
+    padding:1.5rem;
+   
+}
+
+/* Adjust navigation padding for 1024px devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+    nav {
+        padding: 1rem;
+    }
 }
 
 .first-container {
@@ -44,6 +51,14 @@ nav {
     align-items: center;
     height: 85px;
     flex-wrap: wrap;
+}
+
+/* Adjust header layout for 1024px devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .first-container {
+        justify-content: space-between;
+        padding: 0 20px;
+    }
 }
 
     .first-container > p {
@@ -66,27 +81,33 @@ nav {
 
 .navber {
     display: flex;
-    gap: 3rem;
-    margin-left: 3rem;
+    gap: 2rem;
+    margin-left: 1rem;
     align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
     .navber > a {
         text-decoration: none;
         color: #fff;
+        font-size: 0.9rem;
+        padding: 0.5rem;
     }
 
 .video-container {
     padding: 0 1rem;
     margin: 0 1rem;
     border-radius: 5px;
+    margin-top: -2rem;
 }
 
 .video-background {
     position: relative;
     width: 100%;
-    height: 65vh;
+    height: 62vh;
     overflow: hidden;
+    top: 0;
 }
 
 .background-video {
@@ -94,7 +115,7 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    height: 65vh;
+    height: 62vh;
     object-fit: cover;
     z-index: -1;
     opacity: 1;
@@ -119,6 +140,25 @@ nav {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
+}
+
+/* Ensure mobile menu toggle is properly positioned on all devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .mobile-menu-toggle {
+        top: 1.2rem;
+        right: 1rem;
+    }
+}
+
+/* Hide mobile menu toggle at exactly 1024px as desktop nav should be visible */
+@media (width: 1024px) {
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    .navber {
+        display: flex !important;
+    }
 }
 
     .mobile-menu-toggle span {
@@ -147,7 +187,7 @@ nav {
     flex-direction: column;
     background-color: #01325d;
     position: absolute;
-    top: 100%;
+    top: 10%;
     left: 0;
     width: 100%;
     padding: 1rem 0;
@@ -170,7 +210,55 @@ nav {
         display: flex !important;
     }
 
+
+
 /* Responsive styles */
+/* Tablet styles for devices between 768px and 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    header {
+        margin: 0;
+        padding: 0.5rem;
+    }
+
+    .first-container {
+        flex-direction: row;
+        height: auto;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+        justify-content: space-between;
+    }
+
+    .logo > a {
+        font-size: 1.3rem;
+    }
+
+    .first-container > p {
+        font-size: 0.9rem;
+    }
+
+    .collection > img {
+        width: 100px;
+    }
+
+    .navber {
+        gap: 1.5rem;
+        margin-left: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .header-last > marquee {
+        margin: 0 1rem;
+        font-size: small;
+    }
+
+    .video-container {
+        padding: 0;
+        margin: 0 0.5rem;
+        margin-top: -2rem;
+    }
+}
+
 @media screen and (max-width: 768px) {
     header {
         margin: 0;
@@ -187,6 +275,9 @@ nav {
     .navber {
         display: none;
     }
+ .mobile-menu {
+        display: none !important;
+    }
 
     .mobile-menu-toggle {
         display: flex;
@@ -199,7 +290,8 @@ nav {
 
     .video-container {
         padding: 0;
-        margin: 0 0.3rem;
+        margin: 0 0.2rem;
+        margin-top: -2rem;
     }
 
     .video-background {
@@ -227,43 +319,6 @@ nav {
 
 /*full nav section end with video*/
 
-/* Hero Section */
-.hero {
-    color: white;
-    position: relative;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100vh;
-}
-
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.03) 70px), repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,.02) 35px, rgba(255,255,255,.02) 70px);
-        pointer-events: none;
-        z-index: 1;
-    }
-
-    .hero::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: radial-gradient(circle at 20% 50%, rgba(35, 179, 179, 0.12) 0%, transparent 40%), radial-gradient(circle at 80% 30%, rgba(180, 77, 220, 0.1) 0%, transparent 40%), radial-gradient(circle at 60% 70%, rgba(245, 204, 35, 0.08) 0%, transparent 40%);
-        pointer-events: none;
-        z-index: 1;
-    }
-
 
 /* Sections */
 section {
@@ -274,6 +329,14 @@ section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 10px;
+}
+
+/* Ensure proper container width for 1024px devices */
+@media (min-width: 993px) and (max-width: 1024px) {
+    .container {
+        max-width: 95%;
+        padding: 0 15px;
+    }
 }
 
 .text-center {
@@ -563,7 +626,7 @@ section {
 
 /* Contact */
 .contact-section {
-    background: linear-gradient(135deg, var(--primary-color), #1a252f);
+    background: linear-gradient(135deg, #01325d, #1a252f);
     color: white;
     position: relative;
     overflow: hidden;
@@ -956,6 +1019,27 @@ footer {
 }
 
 /* Responsive */
+/* Specific styles for tablets and small laptops (992px to 1024px) */
+@media (min-width: 993px) and (max-width: 1024px) {
+    .navber {
+        gap: 1.5rem;
+        margin-left: 0.5rem;
+    }
+
+    .navber > a {
+        font-size: 0.9rem;
+        padding: 0.4rem;
+    }
+
+    .first-container {
+        padding: 0.8rem 0;
+    }
+
+    .logo > a {
+        font-size: 1.4rem;
+    }
+}
+
 @media (max-width: 992px) {
     .hero h1 {
         font-size: 3rem;
@@ -975,6 +1059,36 @@ footer {
 
     .stat-item {
         flex: 0 0 100%;
+    }
+}
+
+/* Specific fix for 1024px devices */
+@media (min-width: 993px) and (max-width: 1024px) {
+    .navber {
+        gap: 1.2rem;
+        margin-left: 0.8rem;
+    }
+
+    .first-container {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+/* Exact 1024px width fix */
+@media (width: 1024px) {
+    .first-container {
+        flex-wrap: nowrap;
+        justify-content: space-around;
+    }
+
+    .navber {
+        gap: 1.5rem;
+        margin-left: 1rem;
+    }
+
+    .container {
+        max-width: 980px;
     }
 }
 
@@ -1038,6 +1152,17 @@ footer {
 
     .section-title {
         font-size: 1.8rem;
+    }
+}
+
+/* Adjust video height for 1024px devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .video-background {
+        height: 50vh;
+    }
+
+    .background-video {
+        height: 50vh;
     }
 }
 
