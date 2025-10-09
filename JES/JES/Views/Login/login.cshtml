@@ -13,16 +13,16 @@
     <link rel="icon" type="image/png" href="@(Url.Content("~/logo/favicon.png"))" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/MediPOS.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
     <style>
         body {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            background-image: url('../img/bg.png');
         }
 
         .card {
             border-radius: 1.5rem;
+            background: #ffffff7d;
             transition: all 0.3s ease-in-out;
         }
 
@@ -99,8 +99,8 @@
                     <div class="card shadow-lg border-0 my-5">
                         <div class="card-body p-5">
                             <div class="text-center mb-4">
-                                <a asp-controller="Landing" asp-action="Index">
-                                    <img src="~/img/download.jpg" alt="Logo" width="60" class="mb-3" />
+                                <a asp-controller="Home" asp-action="Index">
+                                    <img src="~/img/download.jpg" alt="Logo" width="80" class="mb-3 rounded-circle" />
                                 </a>
                                 <h3 class="fw-bold">Welcome Back</h3>
                                 <p class="text-muted small">Sign in to continue to Jui Embroidery</p>

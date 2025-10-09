@@ -20,7 +20,7 @@
 }
 
 body {
-    background-color: #d3f3ffe2;
+    background-image: url('../img/bg.png');
 }
 
 header {
@@ -69,10 +69,12 @@ nav {
 
 .logo > a {
     text-decoration: none;
-    color: #fff;
-    font-family: monospace;
+    color: greenyellow;
+    -webkit-text-stroke: 1px orange; /* Border thickness and color */
+    -webkit-text-fill-color: greenyellow; /* Inside text color */
+    font-family: 'Montserrat-Medium';
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .collection > img {
@@ -99,7 +101,6 @@ nav {
     padding: 0 1rem;
     margin: 0 1rem;
     border-radius: 5px;
-    margin-top: -2rem;
 }
 
 .video-background {
@@ -255,7 +256,7 @@ nav {
     .video-container {
         padding: 0;
         margin: 0 0.5rem;
-        margin-top: -2rem;
+       
     }
 }
 
@@ -290,8 +291,8 @@ nav {
 
     .video-container {
         padding: 0;
-        margin: 0 0.2rem;
-        margin-top: -2rem;
+        margin: 0 0.3rem;
+        margin-top: -0.5rem;
     }
 
     .video-background {
@@ -351,7 +352,7 @@ section {
 .section-title {
     font-size: 2.5rem;
     font-weight: 800;
-    color: var(--primary-color);
+    color:goldenrod;
     margin-bottom: 20px;
     position: relative;
     display: inline-block;
@@ -389,12 +390,11 @@ section {
 
 /* Services */
 .services-section {
-    background: white;
     position: relative;
 }
 
 .service-card {
-    background: white;
+    background: #ffffff70;
     border-radius: 15px;
     padding: 40px 30px;
     text-align: center;
@@ -525,12 +525,10 @@ section {
 }
 
 /* Team */
-.team-section {
-    background: white;
-}
+
 
 .team-card {
-    background: white;
+    background: #ffffff70;
     border-radius: 15px;
     padding: 30px;
     text-align: center;
@@ -626,11 +624,11 @@ section {
 
 /* Contact */
 .contact-section {
-    background: linear-gradient(135deg, #01325d, #1a252f);
+    background: linear-gradient(135deg, #025aa775, #19b242a8);
     color: white;
     position: relative;
     overflow: hidden;
-    padding: 100px 0;
+    padding: 80px 0;
 }
 
     .contact-section::before {
@@ -1157,6 +1155,9 @@ footer {
 
 /* Adjust video height for 1024px devices */
 @media (min-width: 769px) and (max-width: 1024px) {
+    .video-container{
+        margin-top:-0.5rem;
+    }
     .video-background {
         height: 50vh;
     }
@@ -1171,7 +1172,7 @@ footer {
 /*all team nav section*/
 
 .team-card {
-    background: #fff;
+    background: #ffffff70;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
