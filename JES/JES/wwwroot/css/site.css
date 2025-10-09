@@ -69,10 +69,12 @@ nav {
 
 .logo > a {
     text-decoration: none;
-    color: #fff;
-    font-family: monospace;
+    color: greenyellow;
+    -webkit-text-stroke: 1px orange; /* Border thickness and color */
+    -webkit-text-fill-color: greenyellow; /* Inside text color */
+    font-family: 'Montserrat-Medium';
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .collection > img {
