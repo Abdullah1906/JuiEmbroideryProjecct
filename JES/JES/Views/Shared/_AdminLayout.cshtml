@@ -535,17 +535,6 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 
-    <script type="text/javascript">
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/orderHub")
-            .build();
-        connection.start()
-            .then(() => console.log("SignalR connected"))
-            .catch(err => console.error(err));
-
-
-
-    </script>
     <script>
         // Low stock poller to update navbar badge
         (function () {
