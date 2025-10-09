@@ -2,42 +2,224 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+
+
+<link rel="stylesheet" href="~/landing/fonts/icomoon/style.css">
+<link rel="stylesheet" href="~/landing/css/owl.carousel.min.css">
+<link rel="stylesheet" href="~/landing/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="~/landing/css/style.css">
+
+
+
+
 <style>
-      .core-customer-section {
-        background: linear-gradient(135deg, #fefefe, #e6f0ff);
+      /* Section Background */
+.core-customer-section {
+    background: linear-gradient(135deg, #fefefe, #e6f0ff);
+    padding: 80px 0;
+}
+
+/* Title Styling */
+.core-customer-section h2 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #2a2a2a;
+}
+
+.core-customer-section p {
+    color: #6c757d;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.core-customer-section > .container .text-center > div {
+    width: 60px;
+    height: 3px;
+    background-color: #007bff;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* Glass Card */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.35s ease;
+        width: 180px;
+        height: 240px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
     }
 
-    .customer-card {
-        background: #fff;
-        transition: transform 0.3s, box-shadow 0.3s;
-        padding: 1.5rem 1rem;
-    }
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient( 120deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.15) 100% );
+            transform: rotate(25deg);
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
 
-    .customer-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
-    }
+        .glass-card:hover::before {
+            transform: rotate(25deg) translateX(10%) translateY(5%);
+        }
 
-    @@media (max-width: 575.98px) {
-        .customer-card {
-            padding: 1rem;
+    /* Optional: subtle shimmer effect */
+    @@keyframes shimmer {
+        0% {
+            transform: rotate(25deg) translateX(-100%) translateY(-50%);
+        }
+
+        100% {
+            transform: rotate(25deg) translateX(100%) translateY(-50%);
         }
     }
-    /* Change carousel arrow color */
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        background-color: #007bff; /* Change to any color you want */
-        border-radius: 50%; /* Makes the arrow background circular */
-        width: 40px;
-        height: 40px;
-        background-size: 50%, 50%; /* Adjust size if needed */
+
+    .glass-card::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient( 120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0) 100% );
+        animation: shimmer 3s infinite;
+        pointer-events: none;
     }
 
-        /* Optional: Add hover effect */
-        .carousel-control-prev-icon:hover,
-        .carousel-control-next-icon:hover {
-            background-color: #0056b3; /* Darker shade on hover */
+
+
+/* Hover Effects */
+.glass-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.85);
+}
+
+/* Customer Image */
+.glass-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 123, 255, 0.3);
+    padding: 3px;
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover img {
+    transform: scale(1.1);
+    border-color: #007bff;
+}
+
+/* Customer Name */
+.glass-card h6 a {
+    color: #2a2a2a;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.glass-card h6 a:hover {
+    color: #007bff;
+}
+
+/* Carousel Item */
+.nonloop-block-3 .item {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+/* Owl Carousel Navigation Buttons */
+.owl-carousel .owl-nav button {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background: #007bff;
+    color: #fff !important;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    font-size: 20px !important;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.owl-carousel .owl-nav button:hover {
+    background: #0056b3;
+}
+
+.owl-carousel .owl-prev {
+    left: -50px;
+}
+
+.owl-carousel .owl-next {
+    right: -50px;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+    .glass-card {
+        width: 150px !important;
+        height: 200px !important;
+        padding: 0.8rem;
+    }
+
+    .glass-card img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .glass-card h6 {
+        font-size: 13px !important;
+    }
+
+    .owl-carousel .owl-nav button {
+        display: none;
+    }
+}
+
+@@media (max-width: 575.98px) {
+    .glass-card {
+        padding: 0.6rem;
+    }
+}
+
+    /* Carousel Container Hover Effect */
+    .nonloop-block-3 {
+        padding: 20px 0;
+        transition: all 0.35s ease;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.1); /* subtle background */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+        .nonloop-block-3:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.15);
         }
+
+        /* Optional: smooth transition for carousel items when hovered */
+        .nonloop-block-3 .item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .nonloop-block-3 .item:hover {
+                transform: translateY(-5px) scale(1.02);
+            }
+/* Glass Card with Subtle Light Reflection */
 
 
 </style>
@@ -154,65 +336,49 @@
 
 
 <!-- Core Customer Slider Section -->
-<section id="core-customers" class="core-customer-section py-5" style="background-color:#f8f9fa;">
+
+<div class="site-section bg-light" style="padding:30px">
     <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="section-title fw-bold" style="margin-bottom:0px">Our Core Customers</h2>
-            <p class="lead mt-3 text-muted">Trusted clients who rely on our embroidery solutions</p>
+        <div class="text-center">
+            <h2 class="fw-bold text-uppercase" style="color:#2a2a2a;">Our Core Customers</h2>
+            <div style="width:60px; height:3px; background-color:#007bff; margin:10px auto 0;"></div>
+            <p class="text-muted mt-3 mb-2">Trusted partners who power our embroidery excellence</p>
         </div>
 
-        <div id="coreCustomerCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                @{
-                    int chunkSize = 3; // Number of customers per slide
-                    var customerChunks = Model.CoreCustomers
-                                         .Select((c, i) => new { Customer = c, Index = i })
-                                         .GroupBy(x => x.Index / chunkSize)
-                                         .Select(g => g.Select(x => x.Customer).ToList())
-                                         .ToList();
-                }
-
-                @for (int i = 0; i < customerChunks.Count; i++)
-                {
-                    var chunk = customerChunks[i];
-                    <div class="carousel-item @(i == 0 ? "active" : "")">
-                        <div class="row justify-content-center">
-                            @foreach (var customer in chunk)
-                            {
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="customer-card text-center p-4 rounded shadow-sm">
-                                        @if (!string.IsNullOrEmpty(customer.ImageUrl))
-                                        {
-                                            <img src="@customer.ImageUrl" alt="@customer.CompanyName" 
-                                                 class="img-fluid mb-3 rounded-circle" 
-                                                 style="width:100px; height:100px; object-fit:cover;" />
-                                        }
-                                        <h5 class="fw-bold">@customer.CompanyName</h5>
-                                    </div>
+        <div class="row">
+            <div class="col-md-12 block-3 products-wrap">
+                <div class="nonloop-block-3 owl-carousel" style="margin-right: 0;">
+                    @foreach (var product in Model.CoreCustomers)
+                    {
+                        <div class="item d-flex justify-content-center" style="margin-right: 8px; margin-bottom: 10px;">
+                            <div class="card text-center border-0 p-2 d-flex flex-column glass-card" style="width: 180px; height: 240px;">
+                                <div style="height:70%">
+                                    <a>
+                                        <img src="@product.ImageUrl"
+                                             alt="@product.CompanyName"
+                                             class="img-fluid mx-auto d-block mb-2"
+                                             style="width: 120px; height: 120px; object-fit: fill;" />
+                                    </a>
                                 </div>
-                            }
+                                <div style="height:30%;">
+                                    <h6 class="text-dark mb-1" style="font-size: 14px;">
+                                        <a 
+                                           class="text-dark text-decoration-none">
+                                            @product.CompanyName
+                                        </a>
+                                    </h6>
+                                </div>
+                                
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
-
-            <!-- Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#coreCustomerCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#coreCustomerCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
+
+
     </div>
-</section>
-
-
-
-
-
+</div>
 
 
 
@@ -385,3 +551,11 @@
         </div>
     </div>
 </section>
+
+<script src="~/landing/js/jquery-3.3.1.min.js"></script>
+<script src="~/landing/js/jquery-ui.js"></script>
+<script src="~/landing/js/owl.carousel.min.js"></script>
+<script src="~/landing/js/jquery.magnific-popup.min.js"></script>
+<script src="~/landing/js/aos.js"></script>
+<script src="~/landing/js/main.js"></script>
+
