@@ -186,7 +186,7 @@ nav {
 .mobile-menu {
     display: none;
     flex-direction: column;
-    background-color: #01325d;
+    background-color: #01325dd6;
     position: absolute;
     top: 10%;
     left: 0;
