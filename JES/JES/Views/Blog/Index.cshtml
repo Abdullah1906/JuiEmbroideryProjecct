@@ -2,61 +2,177 @@
     ViewData["Title"] = "Blog";
 }
 
-<style>
-    .blog-conatiner{
-        padding:15px;
-    }
+<!-- Blog Section -->
+<section class="blog-section py-5">
+    <div class="container">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h2 class="text-success fw-bold">Blog</h2>
+            <p class="lead text-muted mt-3">
+                <strong>Stay updated with the latest news, tips, and insights from JUI Embroidery.</strong>
+            </p>
+        </div>
 
-    .card{
-        width: 380px;
-
-    }
-    .card-img-top{
-        width:380px;
-        height: 250px;
-        overflow:hidden;
-    }
-
-</style>
-<div class="blog-conatiner">
-        <h2 class="text-success text-center mb-3">Blog</h2>
-        <p class="text-center mb-5"><strong>Stay updated with the latest news, tips, and insights from JUI Embroidery.</strong></p>
-
-        <div class="row">
+        <!-- Blog Cards -->
+        <div class="row justify-content-center g-4">
             <!-- Blog Post 1 -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card shadow-sm">
-                <img src="https://tse1.mm.bing.net/th/id/OIP.Hsj6dxB_4r7m2zdzn70_aAHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top" alt="Blog Post 1">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                <div class="card blog-card h-100 border-0 shadow-sm">
+                    <div class="blog-img-wrapper">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.Hsj6dxB_4r7m2zdzn70_aAHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
+                             class="card-img-top" alt="Embroidery Tech Trends">
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">Embroidery Tech Trends</h5>
-                        <p class="card-text">Discover the latest trends in embroidery technology and how they can enhance your business operations.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <h5 class="card-title fw-bold">Embroidery Tech Trends</h5>
+                        <p class="card-text text-muted">
+                            Discover the latest trends in embroidery technology and how they can enhance your business operations.
+                        </p>
+                        <a href="#" class="btn btn-outline-success rounded-pill px-3">Read More</a>
                     </div>
                 </div>
             </div>
 
             <!-- Blog Post 2 -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 shadow-sm">
-                <img src="https://hips.hearstapps.com/hmg-prod/images/best-embroidery-machines-1629128917.jpg" class="card-img-top" alt="Blog Post 2">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                <div class="card blog-card h-100 border-0 shadow-sm">
+                    <div class="blog-img-wrapper">
+                        <img src="https://hips.hearstapps.com/hmg-prod/images/best-embroidery-machines-1629128917.jpg"
+                             class="card-img-top" alt="Boosting Production Efficiency">
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">Boosting Production Efficiency</h5>
-                        <p class="card-text">Learn how automation in embroidery can streamline your production and improve turnaround time.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <h5 class="card-title fw-bold">Boosting Production Efficiency</h5>
+                        <p class="card-text text-muted">
+                            Learn how automation in embroidery can streamline your production and improve turnaround time.
+                        </p>
+                        <a href="#" class="btn btn-outline-success rounded-pill px-3">Read More</a>
                     </div>
                 </div>
             </div>
 
             <!-- Blog Post 3 -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 shadow-sm">
-                <img src="https://tse2.mm.bing.net/th/id/OIP.g889vjxTk4cyGTB5PArKrwHaFj?cb=12&w=768&h=576&rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top" alt="Blog Post 3">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                <div class="card blog-card h-100 border-0 shadow-sm">
+                    <div class="blog-img-wrapper">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.g889vjxTk4cyGTB5PArKrwHaFj?cb=12&w=768&h=576&rs=1&pid=ImgDetMain&o=7&rm=3"
+                             class="card-img-top" alt="Thread & Material Guide">
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">Thread & Material Guide</h5>
-                        <p class="card-text">Explore different types of threads and materials perfect for high-quality embroidery work.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <h5 class="card-title fw-bold">Thread & Material Guide</h5>
+                        <p class="card-text text-muted">
+                            Explore different types of threads and materials perfect for high-quality embroidery work.
+                        </p>
+                        <a href="#" class="btn btn-outline-success rounded-pill px-3">Read More</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
+
+<!-- Styles -->
+<style>
+    /* Base Section */
+    .blog-section {
+        padding:0 50px;
+    }
+
+    /* Blog Card */
+    .blog-card {
+        border-radius: 16px;
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+    }
+
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+    /* Image Wrapper */
+    .blog-img-wrapper {
+        width: 100%;
+        height: 240px;
+        overflow: hidden;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+    }
+
+        .blog-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+    .blog-card:hover img {
+        transform: scale(1.08);
+    }
+
+    /* Card Text */
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+        color: #212529;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    /* Buttons */
+    .btn-outline-success {
+        border-width: 2px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-success:hover {
+            background-color: #198754;
+            color: white;
+        }
+
+    /* Responsive Adjustments */
+    @@media (max-width: 992px) {
+        .blog-img-wrapper
+
+    {
+        height: 220px;
+    }
+
+    }
+
+    @@media (max-width: 768px) {
+        .blog-section
+
+    {
+        padding: 40px 15px;
+    }
+
+    .blog-img-wrapper {
+        height: 200px;
+    }
+
+    .card-body {
+        padding: 1.25rem;
+    }
+
+    .card-title {
+        font-size: 1.15rem;
+    }
+
+    }
+
+    @@media (max-width: 576px) {
+        .blog-img-wrapper
+
+    {
+        height: 180px;
+    }
+
+    }
+</style>
