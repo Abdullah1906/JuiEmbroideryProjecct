@@ -1,0 +1,179 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section py-5">
+    <div class="container">
+        <!-- Heading -->
+        <div class="text-center mb-5">
+            <h2 class="section-title text-success">Contact Us</h2>
+            <p class="lead mt-3"><b>Get in touch with us for your embroidery needs</b></p>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 col-md-11 col-12">
+                <div class="contact-card p-4 p-md-5">
+                    <div class="row gy-4 gx-4">
+                        <div class="col-sm-6 col-12">
+                            <div class="contact-item d-flex align-items-center">
+                                <div class="icon-box"><i class="fas fa-user"></i></div>
+                                <div>
+                                    <h5 class="mb-1">Managing Director</h5>
+                                    <p class="mb-0">A.K Zaman</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-12">
+                            <div class="contact-item d-flex align-items-center">
+                                <div class="icon-box"><i class="fas fa-phone"></i></div>
+                                <div>
+                                    <h5 class="mb-1">Phone</h5>
+                                    <p class="mb-0">Cell: 01911139260</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-12">
+                            <div class="contact-item d-flex align-items-center">
+                                <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                                <div>
+                                    <h5 class="mb-1">Email</h5>
+                                    <p class="mb-0">zaman111jui@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-12">
+                            <div class="contact-item d-flex align-items-center">
+                                <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                                <div>
+                                    <h5 class="mb-1">Address</h5>
+                                    <p class="mb-0">
+                                        House-25, Road-45, Rajabari, Block-D<br>
+                                        Turag, Dhaka-1230
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- row -->
+                </div><!-- contact-card -->
+            </div>
+        </div>
+
+        <!-- Google Map -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="map-container rounded-4 overflow-hidden shadow-sm">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3649.460946630213!2d90.35570607477095!3d23.83628028453752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c3ce07f67b0b%3A0xe32b90b2f96303bb!2sRajabari%20-%20Turag!5e0!3m2!1sen!2sbd!4v1697105555555!5m2!1sen!2sbd"
+                            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* --- Base Section --- */
+    .contact-section {
+        padding:0 20px;
+        overflow: hidden;
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
+        font-weight: 700;
+        position: relative;
+        display: inline-block;
+    }
+
+        .section-title::after {
+            content: "";
+            width: 60px;
+            height: 4px;
+            background: #ff7a00;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+    /* --- Contact Card --- */
+    .contact-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s ease;
+    }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+    /* --- Contact Items --- */
+    .contact-item {
+        background: rgba(255, 255, 255, 0.65);
+        border-radius: 16px;
+        padding: 16px 20px;
+        transition: 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+        .contact-item:hover {
+            background: #ffffff;
+            transform: translateY(-4px);
+        }
+
+    /* --- Icons --- */
+    .icon-box {
+        background: linear-gradient(135deg, #28a745, #6fdc8b);
+        color: white;
+        font-size: 1.4rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+        transition: 0.3s;
+    }
+
+    .contact-item:hover .icon-box {
+        transform: rotate(8deg) scale(1.05);
+        box-shadow: 0 6px 14px rgba(40, 167, 69, 0.4);
+    }
+
+    /* --- Map --- */
+    .map-container {
+        height: 100%;
+        min-height: 350px;
+        border: 5px solid #ffffff;
+        border-radius: 20px;
+    }
+
+    /* --- Responsive Tweaks --- */
+    @@media (max-width: 767px) {
+        .contact-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .icon-box {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+        margin-right: 12px;
+    }
+
+    .contact-item {
+        padding: 14px 16px;
+    }
+
+    }
+</style>

@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+//sw
+document.getElementById("myElement").style.display = "none";
+
 
 // Add animation classes when elements come into view
 document.addEventListener('DOMContentLoaded', function() {
