@@ -386,6 +386,12 @@
                     <i class="bi bi-capsule me-2"></i> Core Customer
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white @(ViewContext.RouteData.Values["controller"]?.ToString() == "Collection" ? "active" : "")"
+                   asp-controller="Collection" asp-action="Index">
+                    <i class="bi bi-capsule me-2"></i> Collection
+                </a>
+            </li>
             <!-- Products Menu -->
             <li class="nav-item">
                 <a class="nav-link text-white d-flex align-items-center justify-content-between @(ViewContext.RouteData.Values["controller"]?.ToString() == "Product" ? "active" : "")"

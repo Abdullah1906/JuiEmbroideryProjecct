@@ -394,10 +394,6 @@
                     </div>
                     <div class="carousel-slide">
                         <img src="https://tse4.mm.bing.net/th/id/OIP.YnmKMW2K9uSrg4BJ3NiUCgHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Factory 5">
-                        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200" alt="Factory 1">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=1200" alt="Factory 2">
                     </div>
                     <div class="carousel-slide">
                         <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200" alt="Factory 3">
@@ -405,9 +401,7 @@
                     <div class="carousel-slide">
                         <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200" alt="Factory 4">
                     </div>
-                    <div class="carousel-slide">
-                        <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1200" alt="Factory 5">
-                    </div>
+                    
                 </div>
 
                 <div class="carousel-controls">
@@ -423,11 +417,45 @@
 
         <!-- Partial View Container -->
         <div id="partialViewContainer">
-            <h3 style="color: #00d4ff; margin-bottom: 15px;">Welcome to Our Company</h3>
-            <p style="line-height: 1.8; color: #ccc;">
-                We are a leading company in the embroidery industry, committed to delivering high-quality products and services. Our state-of-the-art facilities and experienced team ensure that we meet the diverse needs of our clients. Explore our company profile to learn more about our history, mission, and values.
-                Select a section from the navigation menu to view more information about our company.
-            </p>
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">Start Manufacturing Unit</h3>
+
+            <div style="line-height: 1.8; color: #ccc;">
+                <p><strong>Year Established:</strong> 2006</p>
+                <p><strong>Total No. of Workers:</strong> 300</p>
+                <p><strong>Total Size of Plant:</strong></p>
+
+                <ul style="margin-left: 20px; margin-top: 5px;">
+                    <li><strong>Factory Floor:</strong> 7000 square feet</li>
+                    <li><strong>Inspection Room:</strong> 15 X 20 square feet</li>
+                    <li><strong>Store Room:</strong> 17 X 08 square feet</li>
+                    <li><strong>Office Room:</strong> 10 X 10 square feet</li>
+                    <li><strong>Manager Room:</strong> 10 X 08 square feet</li>
+                    <li><strong>Accounts Room:</strong> 08 X 08 square feet</li>
+                    <li><strong>Exit:</strong> 02</li>
+                    <li><strong>Toilet:</strong> 03 (men's & ladies)</li>
+                    <li><strong>Emergency Exit:</strong> 02</li>
+                </ul>
+
+                <p><strong>Total Machines:</strong> 15 sets</p>
+                <p><strong>Total Sewing Lines:</strong> 17 Lines</p>
+                <p><strong>Daily Capacity Per Day:</strong> 10,000 PCs/Day</p>
+
+                <p><strong>Product Line:</strong></p>
+                <ul>
+                    <li>Men’s, Ladies, Boys, Girls and Kids (Denim Bottom)</li>
+                    <li>Shorts, Skirts, Western Jacket, Shorts All</li>
+                    <li>Over All & Cargo Pants/Shorts</li>
+                </ul>
+                <p><strong>Financial Institutions:</strong></p>
+                <ul>
+                    <li>
+                        SHAJALAL ISLAMI BANK Plc
+                        <br>
+                        <small style="color: #ccc;">Address: SOLAR TRADE CENTER(1st & 2nd FLOOR) POLT-16, SECTOR-11, GARIB-E-NEWAZ AVENUE, UTTARA, DHAKA-1230</small>
+                    </li>
+                </ul>
+
+            </div>
         </div>
     </div>
 
@@ -444,38 +472,23 @@
             <div class="nav-links">
                 <a class="nav-link" onclick="loadPartialView('Collections')">Collections</a>
                 <a class="nav-link" onclick="loadPartialView('OurCoreCustomers')">Our Core Customers</a>
+                <a class="nav-link" onclick="loadPartialView('Accessories')">Machines</a>
                 <a class="nav-link" onclick="loadPartialView('AwardsCertification')">Awards & Certification</a>
                 <a class="nav-link" onclick="loadPartialView('CodeOfConduct')">Code Of Conduct</a>
                 <a class="nav-link" onclick="loadPartialView('Commitment')">Commitment</a>
                 <a class="nav-link" onclick="loadPartialView('Vision')">Vision</a>
                 <a class="nav-link" onclick="loadPartialView('Mission')">Mission</a>
             </div>
+
         </div>
 
-        <div class="news-section">
-            <div class="news-header">
-                <h2>
-                    <i class="fas fa-newspaper"></i>
-                    Latest News
-                </h2>
-            </div>
-            <div class="news-content">
-                <div class="news-item">
-                    <h3>Tusuka Trousers ltd is now ISO 9001:2015 (QMS) approved factory.......</h3>
-                    <p class="news-date">15.06.2017</p>
-                </div>
-                <div class="news-item">
-                    <h3>New Sustainable Production Line Launched</h3>
-                    <p class="news-date">22.08.2017</p>
-                </div>
-                <div class="news-item">
-                    <h3>International Quality Award Recognition</h3>
-                    <p class="news-date">10.11.2017</p>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
+
+
+
+
 
 <!-- Font Awesome for Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -548,16 +561,14 @@
         const container = document.getElementById('partialViewContainer');
 
         // Update active link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-        });
+        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
         event.target.classList.add('active');
 
         // Show loading
         container.innerHTML = '<p style="text-align: center; color: #00d4ff;"><i class="fas fa-spinner fa-spin"></i> Loading...</p>';
 
         // Fetch partial view
-        fetch(`/CompanyProfile/${viewName}`)
+        fetch(`/CompanyProfile/LoadSection?viewName=${viewName}`)
             .then(response => response.text())
             .then(html => {
                 container.innerHTML = html;
@@ -567,6 +578,7 @@
                 console.error('Error:', error);
             });
     }
+
 
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', initCarousel);
