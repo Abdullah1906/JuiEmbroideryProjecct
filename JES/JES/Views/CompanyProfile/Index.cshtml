@@ -1,0 +1,544 @@
+﻿@{
+    ViewData["Title"] = "Company Profile";
+}
+
+<!-- Main CSS Styles -->
+<style>
+    .profile-container {
+        max-width: 1400px;
+        margin:1rem auto;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+    }
+
+    /* Company Profile Section */
+    .profile-section {
+        background: #0a2540;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #1e3a5f 0%, #0a2540 100%);
+        padding: 20px 30px;
+        border-bottom: 3px solid #00d4ff;
+    }
+
+        .profile-header h2 {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-header i {
+            font-size: 28px;
+        }
+
+    /* Carousel Styles */
+    .carousel-container {
+        position: relative;
+        background: #0d1b2a;
+        padding: 30px;
+    }
+
+    .carousel-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    .carousel-slide {
+        display: none;
+        animation: fadeIn 0.5s;
+    }
+
+        .carousel-slide.active {
+            display: block;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+    }
+
+    .carousel-controls {
+        position: absolute;
+        top: 50%;
+        width: 93%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        padding: 0 20px;
+        pointer-events: none;
+    }
+
+    .carousel-btn {
+        pointer-events: all;
+        background: rgba(0, 212, 255, 0.8);
+        border: none;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .carousel-btn:hover {
+            background: #00d4ff;
+            transform: scale(1.1);
+        }
+
+    .carousel-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+        .indicator.active {
+            background: #00d4ff;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+    /* Thumbnail Gallery */
+    .thumbnail-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .thumbnail {
+        height: 80px;
+        border-radius: 6px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: all 0.3s;
+    }
+
+        .thumbnail:hover {
+            border-color: #00d4ff;
+            transform: translateY(-3px);
+        }
+
+        .thumbnail.active {
+            border-color: #00d4ff;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    /* Content Section */
+    .content-section {
+        background: #0d1b2a;
+        padding: 30px;
+        margin-top: 20px;
+        border-radius: 8px;
+    }
+
+    /* Navigation Section */
+    .navigation-section {
+        background: #0a2540;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        height: fit-content;
+    }
+
+    .nav-header {
+        background: linear-gradient(135deg, #1e3a5f 0%, #0a2540 100%);
+        padding: 20px 30px;
+        border-bottom: 3px solid #00d4ff;
+    }
+
+        .nav-header h2 {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+    .nav-links {
+        padding: 20px;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 15px 20px;
+        margin-bottom: 12px;
+        background: #0d1b2a;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 6px;
+        border-left: 4px solid transparent;
+        transition: all 0.3s;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .nav-link:hover {
+            background: #1e3a5f;
+            border-left-color: #00d4ff;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+        }
+
+        .nav-link.active {
+            background: #1e3a5f;
+            border-left-color: #00d4ff;
+            font-weight: 600;
+        }
+
+    /* Latest News Section */
+    .news-section {
+        background: #0a2540;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-top: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .news-header {
+        background: linear-gradient(135deg, #1e3a5f 0%, #0a2540 100%);
+        padding: 20px 30px;
+        border-bottom: 3px solid #00d4ff;
+    }
+
+        .news-header h2 {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+    .news-content {
+        padding: 20px;
+    }
+
+    .news-item {
+        background: #0d1b2a;
+        padding: 20px;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        border-left: 4px solid #00d4ff;
+        transition: all 0.3s;
+    }
+
+        .news-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+        }
+
+        .news-item h3 {
+            color: #00d4ff;
+            font-size: 16px;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+    .news-date {
+        color: #8899aa;
+        font-size: 14px;
+    }
+
+    /* Partial View Container */
+    #partialViewContainer {
+        background: #0d1b2a;
+        padding: 30px;
+        border-radius: 8px;
+        margin-top: 20px;
+        color: #ffffff;
+        min-height: 200px;
+    }
+
+    /* Responsive Design */
+    @@media (max-width: 1024px) {
+        .profile-container {
+        grid-template-columns: 1fr;
+    }
+
+    .carousel-slide img {
+        height: 400px;
+    }
+
+    }
+
+    @@media (max-width: 768px) {
+        body
+
+    {
+        padding: 10px;
+    }
+
+    .profile-header h2,
+    .nav-header h2,
+    .news-header h2 {
+        font-size: 20px;
+    }
+
+    .carousel-slide img {
+        height: 300px;
+    }
+
+    .thumbnail-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+
+    .thumbnail {
+        height: 60px;
+    }
+
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    }
+
+    @@media (max-width: 480px) {
+        .profile-header, .nav-header, .news-header
+
+    {
+        padding: 15px 20px;
+    }
+
+    .carousel-container,
+    .content-section,
+    #partialViewContainer {
+        padding: 20px;
+    }
+
+    .carousel-slide img {
+        height: 250px;
+    }
+
+    .nav-link {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+    .news-item {
+        padding: 15px;
+    }
+
+    }
+</style>
+
+<div class="profile-container">
+    <!-- Left Column: Company Profile -->
+    <div>
+        <div class="profile-section">
+            <div class="profile-header">
+                <h2>
+                    <i class="fas fa-building"></i>
+                    Company Profile
+                </h2>
+            </div>
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-slide active">
+                        <img src="https://i.etsystatic.com/15403697/r/il/37f7a1/6229630744/il_1080xN.6229630744_1sau.jpg" alt="Factory 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.U9sMeaFPDQ5LtIeS_xfP-gHaEK?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Factory 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://us03-imgcdn.ymcart.com/93339/2023/08/10/f/f/fff3a2a634c1773e.jpg?x-oss-process=image/quality,Q_90/auto-orient,1/resize,m_lfit,w_1500,h_1500" alt="Factory 3">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.teamshirts.net/image/upload/q_auto,fl_lossy,f_auto/content/faq/faqEmbroiderySub" alt="Factory 4">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.YnmKMW2K9uSrg4BJ3NiUCgHaE8?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Factory 5">
+                    </div>
+                </div>
+
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" onclick="changeSlide(-1)">‹</button>
+                    <button class="carousel-btn next" onclick="changeSlide(1)">›</button>
+                </div>
+
+                <div class="carousel-indicators" id="indicators"></div>
+
+                <div class="thumbnail-gallery" id="thumbnails"></div>
+            </div>
+        </div>
+
+        <!-- Partial View Container -->
+        <div id="partialViewContainer">
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">Welcome to Our Company</h3>
+            <p style="line-height: 1.8; color: #ccc;">
+                We are a leading company in the embroidery industry, committed to delivering high-quality products and services. Our state-of-the-art facilities and experienced team ensure that we meet the diverse needs of our clients. Explore our company profile to learn more about our history, mission, and values.
+            </p>
+        </div>
+    </div>
+
+    <!-- Right Column: Navigation & News -->
+    <div>
+        <div class="navigation-section">
+           
+        </div>
+
+        <div class="news-section">
+            <div class="news-header">
+                <h2>
+                    <i class="fas fa-newspaper"></i>
+                    Latest News
+                </h2>
+            </div>
+            <div class="news-content">
+                <div class="news-item">
+                    <h3>Tusuka Trousers ltd is now ISO 9001:2015 (QMS) approved factory.......</h3>
+                    <p class="news-date">15.06.2017</p>
+                </div>
+                <div class="news-item">
+                    <h3>New Sustainable Production Line Launched</h3>
+                    <p class="news-date">22.08.2017</p>
+                </div>
+                <div class="news-item">
+                    <h3>International Quality Award Recognition</h3>
+                    <p class="news-date">10.11.2017</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+
+    // Initialize carousel
+    function initCarousel() {
+        // Create indicators
+        const indicatorsContainer = document.getElementById('indicators');
+        const thumbnailsContainer = document.getElementById('thumbnails');
+
+        for (let i = 0; i < totalSlides; i++) {
+            // Create indicator
+            const indicator = document.createElement('div');
+            indicator.className = 'indicator' + (i === 0 ? ' active' : '');
+            indicator.onclick = () => goToSlide(i);
+            indicatorsContainer.appendChild(indicator);
+
+            // Create thumbnail
+            const thumbnail = document.createElement('div');
+            thumbnail.className = 'thumbnail' + (i === 0 ? ' active' : '');
+            thumbnail.onclick = () => goToSlide(i);
+            const img = slides[i].querySelector('img').cloneNode();
+            thumbnail.appendChild(img);
+            thumbnailsContainer.appendChild(thumbnail);
+        }
+    }
+
+    function showSlide(n) {
+        if (n >= totalSlides) currentSlide = 0;
+        if (n < 0) currentSlide = totalSlides - 1;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[currentSlide].classList.add('active');
+
+        // Update indicators
+        const indicators = document.querySelectorAll('.indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentSlide);
+        });
+
+        // Update thumbnails
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function changeSlide(n) {
+        currentSlide += n;
+        showSlide(currentSlide);
+    }
+
+    function goToSlide(n) {
+        currentSlide = n;
+        showSlide(currentSlide);
+    }
+
+    // Auto-advance carousel
+    setInterval(() => {
+        changeSlide(1);
+    }, 5000);
+
+    // Load partial view via AJAX
+    function loadPartialView(viewName) {
+        const container = document.getElementById('partialViewContainer');
+
+        // Update active link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        event.target.classList.add('active');
+
+        // Show loading
+        container.innerHTML = '<p style="text-align: center; color: #00d4ff;"><i class="fas fa-spinner fa-spin"></i> Loading...</p>';
+
+        // Fetch partial view
+        fetch(`/CompanyProfile/${viewName}`)
+            .then(response => response.text())
+            .then(html => {
+                container.innerHTML = html;
+            })
+            .catch(error => {
+                container.innerHTML = '<p style="color: #ff4444;">Error loading content. Please try again.</p>';
+                console.error('Error:', error);
+            });
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initCarousel);
+</script>
