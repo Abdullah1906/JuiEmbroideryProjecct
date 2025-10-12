@@ -33,7 +33,7 @@
                 <a href="#products">Products</a>
                 <a asp-controller="CompanyProfile" asp-action="Index">Company Profile</a>
                 <a asp-controller="Organogram" asp-action="Index">Organogram</a>
-                <a asp-controller="Gallery" asp-action="Index">Gallery</a>
+               
                 <a asp-controller="Blog" asp-action="Index">Blog</a>
                 <a asp-controller="Contact" asp-action="Index">Contact</a>
                 <a asp-controller="Login" asp-action="Login">Login</a>
@@ -46,12 +46,13 @@
             </div>
             <!-- Mobile menu -->
             <div class="mobile-menu">
-             <a href="/">Home</a>
+                <a href="/">Home</a>
                 <a href="#services">Services</a>
                 <a href="#products">Products</a>
+               
                 <a asp-controller="CompanyProfile" asp-action="Index">Company Profile</a>
                 <a asp-controller="Organogram" asp-action="Index">Organogram</a>
-                <a asp-controller="Gallery" asp-action="Index">Gallery</a>
+                
                 <a asp-controller="Blog" asp-action="Index">Blog</a>
                 <a asp-controller="Contact" asp-action="Index">Contact</a>
                 <a asp-controller="Login" asp-action="Login">Login</a>
@@ -85,7 +86,7 @@
                         <a href="#about">About Us</a>
                         <a href="#services">Services</a>
                         <a href="#products">Products</a>
-                        <a href="#team">Our Team</a>
+                        
                         <a href="#contact">Contact</a>
                     </div>
                 </div>
@@ -148,10 +149,12 @@
         // Navbar scroll effect
         window.addEventListener('scroll', function () {
             const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+            if(navbar){
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
             }
         });
 

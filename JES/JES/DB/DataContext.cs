@@ -19,6 +19,7 @@ namespace JES.DB
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<CoreCustomer> CoreCustomers { get; set; }
+        public DbSet<CollectionItem> CollectionItems { get; set; }
     }
  
 }

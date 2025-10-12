@@ -24,6 +24,9 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\uploads\customers\" />
+    <Folder Include="wwwroot\uploads\Collection\" />
+    <Folder Include="wwwroot\uploads\customers\" />
+    <Folder Include="wwwroot\uploads\products\" />
     <Folder Include="wwwroot\uploads\products\" />
   </ItemGroup>
 
